@@ -1,22 +1,57 @@
 # vue-common-components
 
-> My perfect Nuxt.js project
+> Global basic components for your Vue.js/Nuxt.js project
 
-## Build Setup
+## Getting started
+
+#### 1. Install the dependency.
 
 ```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+yarn add --dev vue-common-components
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+```bash
+npm i vue-common-components
+```
+
+#### 2. Init the plugin.
+
+If you are using Vue.js:
+```javascript
+// main.js
+import Vue from 'vue'
+import VueCommonComponents from 'vue-common-components'
+Vue.use(VueCommonComponents)
+```
+
+If you are using Nuxt.js:  
+The plugin inits automatically, you just have to add it in nuxt config:
+
+```javascript
+// nuxt.config.js
+export default {
+  plugins: [
+    'vue-common-components'
+  ],
+  commonComponents: {
+    // custom options here
+  }
+}
+```
+
+#### 3. Use common components everywhere in project:
+
+```vue
+// any component or page
+<template>
+  <div class="your-any-component">
+    <common-button>Button</common-button>
+  </div>
+</template>
+
+<script>
+export default {
+  // No need to import common components
+}
+</script>
+```
