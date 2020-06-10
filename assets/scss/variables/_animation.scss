@@ -1,0 +1,5 @@
+$duration: .2s;
+$function: ease;
+
+$transition-default: all $duration $function;
+$transition-page: $transition-default;
