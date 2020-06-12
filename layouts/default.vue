@@ -20,6 +20,8 @@ export default {
 
 <style lang="scss">
   #app {
-    //
+    main {
+      padding-top: $header-height;
+    }
   }
 </style>

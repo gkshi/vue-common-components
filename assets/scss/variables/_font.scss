@@ -1,13 +1,20 @@
-$font-family-default: 'SF UI Display', Tahoma, Arial, sans-serif;
+$font-family-default: 'SF UI Text', Tahoma, Arial, sans-serif;
 $font-family-secondary: '';
 
 $font-size-default-value: 17;
 
 $font-size-heading: 24px;
+$font-size-subheading: 19px;
 $font-size-default: #{$font-size-default-value}px;
+$font-size-small: 15px;
+$font-size-code: 16px;
 
-$line-height-heading: 23px;
-$line-height-default: 20px;
+$line-height-heading: 29px;
+$line-height-subheading: 25px;
+$line-height-default: 22px;
+$line-height-small: 19px;
+$line-height-code: 21px;
 
 $font-weight-normal: 400;
-$font-weight-semibold: 600;
+$font-weight-semibold: 500;
+$font-weight-bold: 600;

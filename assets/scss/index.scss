@@ -17,6 +17,59 @@ body {
 ::-moz-placeholder { color: rgba($color-text-regular, .5); }
 :-ms-input-placeholder { color: rgba($color-text-regular, .5); }
 
+@font-face {
+  font-family: 'SF UI Text';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/sf-ui-text/SFUIText-Regular.woff2') format('woff2'), url('../fonts/sf-ui-text/SFUIText-Regular.woff') format('woff'), url('../fonts/sf-ui-text/SFUIText-Regular.svg#SFUIText-Regular') format('svg');
+}
+@font-face {
+  font-family: 'SF UI Text';
+  font-weight: 500;
+  font-style: normal;
+  src: url('../fonts/sf-ui-text/SFUIText-Medium.woff2') format('woff2'), url('../fonts/sf-ui-text/SFUIText-Medium.woff') format('woff'), url('../fonts/sf-ui-text/SFUIText-Medium.svg#SFUIText-Medium') format('svg');
+}
+@font-face {
+  font-family: 'SF UI Text';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../fonts/sf-ui-text/SFUIText-Semibold.woff2') format('woff2'), url('../fonts/sf-ui-text/SFUIText-Semibold.woff') format('woff'), url('../fonts/sf-ui-text/SFUIText-Semibold.svg#SFUIText-Semibold') format('svg');
+}
+
+a {
+  color: $color-primary;
+}
+
+strong {
+  font-weight: $font-weight-bold;
+}
+
+small, .small {
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+}
+
+h1, .h1 {
+  font-size: $font-size-heading;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-bold;
+  margin-bottom: 20px;
+}
+
+h2, .h2 {
+  font-size: $font-size-subheading;
+  line-height: $line-height-subheading;
+  font-weight: $font-weight-bold;
+  margin-bottom: 20px;
+}
+
+h3, .h3 {
+  font-size: $font-size-default;
+  line-height: $line-height-default;
+  font-weight: $font-weight-bold;
+  margin-bottom: 10px;
+}
+
 .page-enter-active, .page-leave-active {
   transition: $transition-page;
   // transform: scale(.95);
@@ -35,4 +88,8 @@ body {
   width: 1100px;
   margin-left: auto;
   margin-right: auto;
+
+  &.narrow {
+    width: 640px;
+  }
 }
