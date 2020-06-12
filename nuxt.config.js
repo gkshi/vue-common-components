@@ -16,6 +16,12 @@ export default {
     ]
   },
   /*
+  ** Router options
+  */
+  router: {
+    base: process.env.NODE_ENV === 'production' ? '/vue-common-components/' : '/'
+  },
+  /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
