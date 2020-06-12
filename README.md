@@ -21,7 +21,9 @@ If you are using Vue.js:
 // main.js
 import Vue from 'vue'
 import VueCommonComponents from 'vue-common-components'
-Vue.use(VueCommonComponents)
+Vue.use(VueCommonComponents, {
+  // custom options here
+})
 ```
 
 If you are using Nuxt.js:  
@@ -31,7 +33,7 @@ The plugin inits automatically, you just have to add it in nuxt config:
 // nuxt.config.js
 export default {
   plugins: [
-    'vue-common-components'
+    'node_modules/vue-common-components'
   ],
   commonComponents: {
     // custom options here
