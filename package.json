@@ -21,7 +21,7 @@
   ],
   "author": "George Shinkarev <gkshi@ya.ru>",
   "license": "MIT",
-  "homepage": "https://github.com/gkshi/vue-common-components",
+  "homepage": "https://gkshi.github.io/vue-common-components/",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
