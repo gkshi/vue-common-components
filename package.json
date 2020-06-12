@@ -1,6 +1,6 @@
 {
   "name": "vue-common-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Universal basic components for your Vue.js/Nuxt.js project",
   "main": "lib/index.js",
   "files": [
