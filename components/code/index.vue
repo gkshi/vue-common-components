@@ -33,6 +33,7 @@ export default {
 
 <style lang="scss" scoped>
   .code-component {
+    margin: 0 auto;
     code {
       display: block;
       margin: 15px auto;

@@ -85,7 +85,9 @@
 .labels {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   .label {
+    margin-bottom: 8px;
     &:not(:last-child) {
       margin-right: 8px;
     }

@@ -7,12 +7,13 @@
 
           .property.flex.column.a-start(v-for="(property, i) in component.properties" :key="i")
             .label {{ property.name }}
-            small {{ property.description }}
+            small Description: {{ property.description }}
             small Type: {{ property.type }}
+            small(v-if="property.values") Values: {{ property.values.join(', ') }}
             small Default: {{ property.default || '-' }}
 
-          .label-section.flex.a-center
-            div Events:
+          .label-section.flex.a-start.wrap
+            .title Events:
             .labels
               .label.green(v-for="(event, i) in component.events" :key="i") @{{ event }}
 
@@ -44,10 +45,14 @@ export default {
   methods: {
     checkQuery () {
       if (this.$route.query.component) {
-        window.scroll({
-          top: document.getElementById(this.$route.query.component).offsetTop - 60,
-          left: 0,
-          behavior: 'smooth'
+        this.$nextTick(() => {
+          setTimeout(() => {
+            window.scroll({
+              top: document.getElementById(this.$route.query.component).offsetTop - 60,
+              left: 0,
+              behavior: 'smooth'
+            })
+          }, 500)
         })
       }
     }
@@ -66,6 +71,9 @@ export default {
         z-index: 1;
         & > * {
           width: 50%;
+          &:first-child {
+            padding-right: 40px;
+          }
           &:last-child {
             padding-left: 40px;
           }
@@ -96,6 +104,9 @@ export default {
     }
     .label-section {
       margin-top: 50px;
+      .title {
+        margin-top: 3px;
+      }
     }
     .labels {
       margin-top: 1px;

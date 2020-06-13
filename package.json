@@ -1,11 +1,14 @@
 {
   "name": "vue-common-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Universal basic components for your Vue.js/Nuxt.js project",
   "main": "lib/index.js",
   "files": [
     "lib"
   ],
+  "author": "George Shinkarev <gkshi@ya.ru>",
+  "license": "MIT",
+  "homepage": "https://gkshi.github.io/vue-common-components/",
   "repository": {
     "type": "git",
     "url": "https://github.com/gkshi/vue-common-components.git"
@@ -17,11 +20,10 @@
     "nuxtjs",
     "component",
     "components",
-    "boilerplate"
+    "boilerplate",
+    "button",
+    "input"
   ],
-  "author": "George Shinkarev <gkshi@ya.ru>",
-  "license": "MIT",
-  "homepage": "https://gkshi.github.io/vue-common-components/",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -45,7 +47,7 @@
     "eslint": "^7.2.0",
     "eslint-plugin-nuxt": ">=0.4.2",
     "husky": "^4.0.0",
-    "lint-staged": "^10.0.0",
+    "lint-staged": "^10.2.10",
     "node-sass": "^4.14.1",
     "nuxt": "^2.12.2",
     "pug": "^3.0.0",

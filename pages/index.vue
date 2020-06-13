@@ -95,7 +95,7 @@ export default {
 }
 < /script>`,
         init_options: `{
-  components: ['button'],
+  components: ['button', 'input'],
   nameCasing: 'camelCase'
 }`
       }

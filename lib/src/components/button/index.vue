@@ -22,6 +22,7 @@
 </template>
 
 <script>
+// Nuxt detection for nuxt-link / router-link tag
 let isNuxt = false
 try {
   // eslint-disable-next-line no-unused-vars

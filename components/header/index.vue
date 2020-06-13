@@ -32,7 +32,7 @@ export default {
       if (this.$route.path === '/') {
         try {
           window.scroll({
-            top: document.getElementById('get_started').offsetTop,
+            top: document.getElementById('get_started').offsetTop - 90,
             left: 0,
             behavior: 'smooth'
           })
