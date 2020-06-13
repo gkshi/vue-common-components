@@ -43,7 +43,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/lib'
+    '@/lib',
+    { src: '@/plugins/metrika', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
