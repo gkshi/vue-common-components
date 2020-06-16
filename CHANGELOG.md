@@ -1,6 +1,13 @@
 Changelog
 =========
 
+### 0.0.5 (2020-06-14)
+* Loader component added.
+* Textarea component added.
+* Input error classname was changed.
+* Input required prop added.
+
+
 ### 0.0.4 (2020-06-13)
 * Input component added.
 

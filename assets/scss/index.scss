@@ -53,6 +53,7 @@ h1, .h1 {
   font-size: $font-size-heading;
   line-height: $line-height-heading;
   font-weight: $font-weight-bold;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 
@@ -60,6 +61,7 @@ h2, .h2 {
   font-size: $font-size-subheading;
   line-height: $line-height-subheading;
   font-weight: $font-weight-bold;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 
@@ -67,6 +69,7 @@ h3, .h3 {
   font-size: $font-size-default;
   line-height: $line-height-default;
   font-weight: $font-weight-bold;
+  margin: 0 auto;
   margin-bottom: 10px;
 }
 

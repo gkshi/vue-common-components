@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'spa',
+  mode: 'spa', // universal, spa
   /*
   ** Headers of the page
   */
@@ -67,6 +67,7 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      // config.resolve.alias.vue = 'vue/dist/vue.common'
     }
   }
 }

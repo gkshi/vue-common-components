@@ -14,8 +14,9 @@
 
           .label-section.flex.a-start.wrap
             .title Events:
-            .labels
+            .labels(v-if="component.events && component.events.length")
               .label.green(v-for="(event, i) in component.events" :key="i") @{{ event }}
+            .title(v-else) &nbsp; -
 
         div
           .sticky
@@ -23,12 +24,27 @@
 
             div Live example:
             .live
-              component(:is="`common${component.title}`")
+              component(
+                :is="`common${component.title}`"
+                v-bind="propList(component.example)"
+                v-on="eventList(component.example)")
 </template>
 
 <script>
+// import Vue from 'vue'
 import { mapState } from 'vuex'
 import vCode from '@/components/code'
+
+function _getArrtibuteArray (code) {
+  try {
+    let el = document.createElement('div')
+    el.innerHTML = code
+    el = el.children[0]
+    return Array.from(el.attributes)
+  } catch (e) {
+    return []
+  }
+}
 
 export default {
   components: {
@@ -55,6 +71,36 @@ export default {
           }, 500)
         })
       }
+    },
+    propList (code) {
+      const arr = _getArrtibuteArray(code)
+      const res = {}
+      arr.forEach(i => {
+        if (i.name.includes('@')) {
+          return
+        }
+        if (i.name.includes(':')) {
+          const name = i.name.replace(/:/g, '')
+          // eslint-disable-next-line no-eval
+          res[name] = eval(i.value)
+        }
+        res[i.name] = i.value
+      })
+      return res
+    },
+    eventList (code) {
+      const arr = _getArrtibuteArray(code)
+      const res = {}
+      arr.forEach(i => {
+        if (!i.name.includes('@')) {
+          return
+        }
+        const name = i.name.replace(/@/g, '')
+        res[name] = () => {
+          console.log(i.name)
+        }
+      })
+      return res
     }
   }
 }
@@ -65,7 +111,7 @@ export default {
     .section {
       position: relative;
       z-index: 1;
-      padding: 80px 0;
+      padding: 100px 0;
       .wrapper {
         position: relative;
         z-index: 1;

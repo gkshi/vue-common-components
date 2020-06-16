@@ -1,29 +1,27 @@
 <template>
-  <div class="common-input-component" :class="classList">
+  <div class="common-textarea-component">
     <label v-if="$slots.default" :for="localId">
       <slot />
     </label>
-    <input
+    <textarea
       :id="localId"
       ref="field"
       :name="name"
-      :type="native"
       :value="value"
       :placeholder="placeholder"
       :required="required"
       :autofocus="autofocus"
       :readonly="readonly"
       :disabled="disabled"
+      :cols="cols"
+      :rows="rows"
       @input="$emit('input', $event.target.value)"
       @change="$emit('change', $event.target.value)"
       @focus="$emit('focus', $event.target.value)"
       @blur="$emit('blur', $event.target.value)"
       @keyup="$emit('keyup', $event)"
       @paste="paste"
-    >
-    <div v-if="typeof error === 'string'" class="common-input-error">
-      {{ error }}
-    </div>
+    />
   </div>
 </template>
 
@@ -31,52 +29,49 @@
 import mixinField from '../../mixins/field'
 
 export default {
-  name: 'common-input-component',
+  name: 'common-textarea-component',
   mixins: [mixinField],
   props: {
-    // ID for label and input
+    // ID for label and textarea
     id: String,
 
-    // Input name value
+    // Textarea name value
     name: String,
 
-    // Input type value
-    native: {
-      type: String,
-      default: 'text'
-    },
-
-    // Input type for custom styles
+    // Textarea type for custom styles
     type: {
       type: String,
       default: 'default'
     },
 
-    // Input size for custom styles
+    // Textarea size for custom styles
     size: {
       type: String,
       default: 'default'
     },
 
-    // Input reactive value
+    // Textarea reactive value
     value: [String, Number],
 
     // Error message or state
     error: [String, Boolean],
 
-    // Input placeholder
+    cols: Number,
+    rows: Number,
+
+    // Textarea placeholder
     placeholder: String,
 
-    // Input required state
+    // Textarea required state
     required: Boolean,
 
-    // Input autofocus state
+    // Textarea autofocus state
     autofocus: Boolean,
 
-    // Input readonly state
+    // Textarea readonly state
     readonly: Boolean,
 
-    // Input disabled state
+    // Textarea disabled state
     disabled: Boolean
   },
   data () {
@@ -86,9 +81,9 @@ export default {
   },
   computed: {
     classList () {
-      let str = `common-input-type-${this.type} common-input-size-${this.size}`
+      let str = `common-textarea-type-${this.type} common-textarea-size-${this.size}`
       if (this.error) {
-        str += ' common-input-error'
+        str += ' common-textarea-error'
       }
       return str
     }
@@ -104,5 +99,5 @@ export default {
 </script>
 
 <style>
-  .common-input-component {}
+  .common-textarea-component {}
 </style>

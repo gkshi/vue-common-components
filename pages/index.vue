@@ -7,6 +7,11 @@
       .component-list.flex.center
         nuxt-link.component(v-for="component in components" :to="`/docs?component=${component.id}`" :key="component.id") {{ component.title }}
 
+      .in-dev-list.flex.column.center
+        div Coming soon:
+        .flex.center
+          div(v-for="component in inDev" :key="component") {{ component }}
+
     .wrapper.narrow(id="get_started")
       .h1.heading.flex.center Getting started
 
@@ -95,7 +100,7 @@ export default {
 }
 < /script>`,
         init_options: `{
-  components: ['button', 'input'],
+  components: ['button', 'input', 'textarea'],
   nameCasing: 'camelCase'
 }`
       }
@@ -103,7 +108,8 @@ export default {
   },
   computed: {
     ...mapState({
-      components: state => state.components
+      components: state => state.components,
+      inDev: state => state.inDev
     })
   }
 }
@@ -122,6 +128,19 @@ export default {
       margin: 50px auto 100px;
       & > * {
         margin: 8px;
+      }
+    }
+    .in-dev-list {
+      margin-top: -70px;
+      margin-bottom: 100px;
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+      color: $color-text-light;
+      user-select: none;
+      .flex {
+        & > * {
+          margin: 4px 6px;
+        }
       }
     }
     .component {
