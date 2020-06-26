@@ -1,59 +1,11 @@
-# vue-common-components
+# STATIC
 
-> Global basic components for your Vue.js/Nuxt.js project
+**This directory is not required, you can delete it if you don't want to use it.**
 
-## Getting started
+This directory contains your static files.
+Each file inside this directory is mapped to `/`.
+Thus you'd want to delete this README.md before deploying to production.
 
-#### 1. Install the dependency.
+Example: `/static/robots.txt` is mapped as `/robots.txt`.
 
-```bash
-yarn add --dev vue-common-components
-```
-
-```bash
-npm i vue-common-components
-```
-
-#### 2. Init the plugin.
-
-If you are using Vue.js:
-```javascript
-// main.js
-import Vue from 'vue'
-import VueCommonComponents from 'vue-common-components'
-Vue.use(VueCommonComponents, {
-  // custom options here
-})
-```
-
-If you are using Nuxt.js:  
-The plugin inits automatically, you just have to add it in nuxt config:
-
-```javascript
-// nuxt.config.js
-export default {
-  plugins: [
-    'node_modules/vue-common-components'
-  ],
-  commonComponents: {
-    // custom options here
-  }
-}
-```
-
-#### 3. Use common components everywhere in project:
-
-```vue
-// any component or page
-<template>
-  <div class="your-any-component">
-    <common-button>Button</common-button>
-  </div>
-</template>
-
-<script>
-export default {
-  // No need to import common components
-}
-</script>
-```
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/assets#static).
