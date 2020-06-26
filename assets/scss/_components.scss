@@ -1,0 +1,9 @@
+// modal
+.common-modal-component {
+  dialog {
+    width: 500px;
+    &.common-modal-size-narrow {
+      width: 240px;
+    }
+  }
+}

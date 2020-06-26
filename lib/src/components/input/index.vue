@@ -31,7 +31,6 @@
 import mixinField from '../../mixins/field'
 
 export default {
-  name: 'common-input-component',
   mixins: [mixinField],
   props: {
     // ID for label and input

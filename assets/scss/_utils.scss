@@ -94,6 +94,17 @@
   }
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  & > * {
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
 .label {
   padding: 4px 14px;
   border-radius: 30px;
@@ -103,5 +114,8 @@
   font-weight: $font-weight-semibold;
   &.green {
     background: $color-label-green;
+  }
+  &.blue {
+    background: $color-label-blue;
   }
 }

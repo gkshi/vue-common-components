@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  name: 'common-loader-component',
   props: {
     show: Boolean
   }

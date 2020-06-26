@@ -43,6 +43,7 @@ export default {
       font-size: $font-size-code;
       line-height: $line-height-code;
       border-radius: 5px;
+      overflow: auto;
     }
   }
 </style>

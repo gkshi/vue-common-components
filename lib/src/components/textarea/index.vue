@@ -29,7 +29,6 @@
 import mixinField from '../../mixins/field'
 
 export default {
-  name: 'common-textarea-component',
   mixins: [mixinField],
   props: {
     // ID for label and textarea

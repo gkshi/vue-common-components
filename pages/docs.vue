@@ -10,7 +10,9 @@
             small Description: {{ property.description }}
             small Type: {{ property.type }}
             small(v-if="property.values") Values: {{ property.values.join(', ') }}
-            small Default: {{ property.default || '-' }}
+
+            small(v-if="!property.required") Default: {{ property.default || '-' }}
+            small(v-else) Required property.
 
           .label-section.flex.a-start.wrap
             .title Events:
@@ -18,16 +20,36 @@
               .label.green(v-for="(event, i) in component.events" :key="i") @{{ event }}
             .title(v-else) &nbsp; -
 
+          .advanced-section(v-if="component.advanced" v-html="component.advanced")
+
         div
           .sticky
             vCode.example(:data="component.example")
 
             div Live example:
             .live
+
+              // custom example for modal component
+              template(v-if="component.id === 'modal'")
+                a(href="#" @click.prevent="openModal('modal1')") open modal1
+
               component(
+                v-else
                 :is="`common${component.title}`"
                 v-bind="propList(component.example)"
                 v-on="eventList(component.example)")
+
+    // custom example for modal component
+    commonModal(id="modal1")
+      div(slot="head") heading
+      div The first modal, default size.
+      .buttons(slot="buttons")
+        commonButton(@click="openModal('modal2')") open modal2
+        commonButton(@click="closeModal('modal1')") close
+    commonModal(id="modal2" size="narrow")
+      div The second modal, "narrow" size.
+      template(slot="buttons")
+        commonButton(@click="closeModal('modal2')") close
 </template>
 
 <script>
@@ -97,6 +119,7 @@ export default {
         }
         const name = i.name.replace(/@/g, '')
         res[name] = () => {
+          // eslint-disable-next-line no-console
           console.log(i.name)
         }
       })
@@ -154,7 +177,10 @@ export default {
         margin-top: 3px;
       }
     }
-    .labels {
+    .advanced-section {
+      margin-top: 40px;
+    }
+    ::v-deep .labels {
       margin-top: 1px;
       margin-left: 10px;
     }

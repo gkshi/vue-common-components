@@ -257,9 +257,44 @@ export const state = () => ({
   :rows="3"
   placeholder="placeholder"
 />`
+    },
+    {
+      id: 'modal',
+      title: 'Modal',
+      properties: [
+        {
+          name: 'id',
+          type: 'String',
+          description: 'Modal id for opening and closing',
+          required: true
+        },
+        {
+          name: 'size',
+          type: 'String',
+          description: 'Modal window size (for custom styles)',
+          default: 'default'
+        }
+      ],
+      events: ['open', 'close'],
+      example: `<common-modal id="modal1">
+  <div>Modal content</div>
+</common-modal>
+
+<a href="#" @click.prevent="openModal('modal1')">
+  open modal1
+</a>`,
+      advanced: `<div class="flex a-start">
+  <div>Global methods:</div>
+  <div class="labels">
+    <div class="label blue">openModal(id)</div>
+    <div class="label blue">closeModal(id)</div>
+    <div class="label blue">closeLastModal()</div>
+    <div class="label blue">closeAllModals()</div>
+  </div>
+</div>`
     }
   ],
-  inDev: ['checkbox', 'file', 'modal', 'radio', 'search', 'tabs']
+  inDev: ['checkbox', 'file', 'radio', 'tabs', 'select']
 })
 
 export const getters = {

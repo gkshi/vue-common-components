@@ -46,6 +46,16 @@ export default {
     '@/lib',
     { src: '@/plugins/metrika', mode: 'client' }
   ],
+  commonComponents: {
+    // components: ['button', 'modal'],
+    nameCasing: 'camelCase',
+    modal: {
+      icon: '@/components/icons/cross'
+    },
+    checkbox: {
+      icon: '@/components/icons/check'
+    }
+  },
   /*
   ** Nuxt.js dev-modules
   */

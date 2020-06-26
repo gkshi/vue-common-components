@@ -1,6 +1,6 @@
 {
   "name": "vue-common-components",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Universal basic components for your Vue.js/Nuxt.js project",
   "main": "lib/index.js",
   "files": [
@@ -23,7 +23,9 @@
     "boilerplate",
     "button",
     "input",
-    "loader"
+    "loader",
+    "textarea",
+    "modal"
   ],
   "scripts": {
     "dev": "nuxt",
@@ -35,22 +37,17 @@
   "lint-staged": {
     "*.{js,vue}": "yarn lint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^7.2.0",
+    "eslint": "^7.3.1",
     "eslint-plugin-nuxt": ">=0.4.2",
     "husky": "^4.0.0",
-    "lint-staged": "^10.2.10",
+    "lint-staged": "^10.2.11",
     "node-sass": "^4.14.1",
-    "nuxt": "^2.12.2",
+    "nuxt": "^2.13.1",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^8.0.2",
