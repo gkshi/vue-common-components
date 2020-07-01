@@ -5,6 +5,18 @@ export const state = () => ({
       title: 'Button',
       properties: [
         {
+          name: 'id',
+          type: 'String, Number',
+          description: 'Button "id" attribute value',
+          default: 'random seven-digit number'
+        },
+        {
+          name: 'name',
+          type: 'String',
+          description: 'Button "name" attribute value',
+          default: ''
+        },
+        {
           name: 'type',
           type: 'String',
           description: 'Button type for custom styles',
@@ -66,6 +78,96 @@ export const state = () => ({
 </common-button>`
     },
     {
+      id: 'checkbox',
+      title: 'Checkbox',
+      properties: [
+        {
+          name: 'id',
+          type: 'String',
+          description: 'ID for input tag',
+          default: 'random seven-digit number'
+        },
+        {
+          name: 'name',
+          type: 'String',
+          description: 'Checkbox "name" attribute value',
+          default: ''
+        },
+        {
+          name: 'v-model',
+          type: 'Boolean, Array',
+          description: 'Reactive value. Can be boolean if It\'s a single checkbox, or an array of checked checkbox values.',
+          default: ''
+        },
+        {
+          name: 'value',
+          type: 'String, Boolean, Number, Object, Array, Function',
+          description: 'Value for each checkbox in group.',
+          default: ''
+        },
+        {
+          name: 'checked',
+          type: 'Boolean',
+          description: 'Forced value of "checked" state. If you provide this property, v-model and value will be ignored.',
+          default: ''
+        },
+        {
+          name: 'form',
+          type: 'String',
+          description: 'Form ID checkbox belongs',
+          default: undefined
+        },
+        {
+          name: 'required',
+          type: 'Boolean',
+          description: 'Required state',
+          default: 'false'
+        },
+        {
+          name: 'autofocus',
+          type: 'Boolean',
+          description: 'Autofocus state',
+          default: 'false'
+        },
+        {
+          name: 'readonly',
+          type: 'Boolean',
+          description: 'Readonly state',
+          default: 'false'
+        },
+        {
+          name: 'disabled',
+          type: 'Boolean',
+          description: 'Disabled state',
+          default: 'false'
+        }
+      ],
+      events: ['click', 'change', 'focus', 'blur'],
+      options: [
+        {
+          name: 'icon',
+          type: 'Vue component, HTML code',
+          description: 'Custom checkbox icon',
+          example: `// nuxt.config.js
+commonComponents: {
+  checkbox: {
+    icon: () => import('@/components/icons/check')
+  }
+}`
+        }
+      ],
+      example: `<common-checkbox v-model="checkedSingle">
+  <div>Single</div>
+</common-checkbox>
+<common-checkbox v-model="checkedArray" value="box1">
+  <div>Checkbox 1</div>
+</common-checkbox>
+<common-checkbox v-model="checkedArray" value="box2">
+  <div>Checkbox 2</div>
+</common-checkbox>`,
+      advanced: ''
+    },
+    {
       id: 'input',
       title: 'Input',
       properties: [
@@ -78,7 +180,7 @@ export const state = () => ({
         {
           name: 'name',
           type: 'String',
-          description: 'Input name value',
+          description: 'Input name attribute value',
           default: ''
         },
         {
@@ -166,6 +268,55 @@ export const state = () => ({
       ],
       events: [],
       example: '<common-loader :show="true" />'
+    },
+    {
+      id: 'modal',
+      title: 'Modal',
+      dependencies: ['vuex'],
+      properties: [
+        {
+          name: 'id',
+          type: 'String',
+          description: 'Modal id for opening and closing',
+          required: true
+        },
+        {
+          name: 'size',
+          type: 'String',
+          description: 'Modal window size (for custom styles)',
+          default: 'default'
+        }
+      ],
+      events: ['open', 'close'],
+      options: [
+        {
+          name: 'icon',
+          type: 'Vue component, HTML code',
+          description: 'Custom close icon',
+          example: `// nuxt.config.js
+commonComponents: {
+  modal: {
+    icon: () => import('@/components/icons/cross')
+  }
+}`
+        }
+      ],
+      example: `<common-modal id="modal1">
+  <div>Modal content</div>
+</common-modal>
+
+<a href="#" @click.prevent="openModal('modal1')">
+  open modal1
+</a>`,
+      advanced: `<div>
+  <div class="h3">Global methods:</div>
+  <div class="labels">
+    <div class="label blue">openModal(id)</div>
+    <div class="label blue">closeModal(id)</div>
+    <div class="label blue">closeLastModal()</div>
+    <div class="label blue">closeAllModals()</div>
+  </div>
+</div>`
     },
     {
       id: 'textarea',
@@ -257,44 +408,9 @@ export const state = () => ({
   :rows="3"
   placeholder="placeholder"
 />`
-    },
-    {
-      id: 'modal',
-      title: 'Modal',
-      properties: [
-        {
-          name: 'id',
-          type: 'String',
-          description: 'Modal id for opening and closing',
-          required: true
-        },
-        {
-          name: 'size',
-          type: 'String',
-          description: 'Modal window size (for custom styles)',
-          default: 'default'
-        }
-      ],
-      events: ['open', 'close'],
-      example: `<common-modal id="modal1">
-  <div>Modal content</div>
-</common-modal>
-
-<a href="#" @click.prevent="openModal('modal1')">
-  open modal1
-</a>`,
-      advanced: `<div class="flex a-start">
-  <div>Global methods:</div>
-  <div class="labels">
-    <div class="label blue">openModal(id)</div>
-    <div class="label blue">closeModal(id)</div>
-    <div class="label blue">closeLastModal()</div>
-    <div class="label blue">closeAllModals()</div>
-  </div>
-</div>`
     }
   ],
-  inDev: ['checkbox', 'file', 'radio', 'tabs', 'select']
+  inDev: ['file', 'radio', 'tabs', 'select']
 })
 
 export const getters = {

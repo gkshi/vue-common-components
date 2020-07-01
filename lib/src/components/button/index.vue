@@ -2,6 +2,8 @@
   <div class="common-button-component" @click="click">
     <component
       :is="tagName"
+      :id="id || false"
+      :name="name || false"
       :class="classList"
       role="button"
       :type="tagName === 'button' ? native : false"
@@ -31,6 +33,12 @@ try {
 
 export default {
   props: {
+    // Button "id" attribute value
+    id: [String, Number],
+
+    // Button "name" attribute value
+    name: String,
+
     // Button type for custom styles
     type: {
       type: String,
@@ -86,22 +94,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
   .common-button-component {
-    display: block;
-  }
-  .common-button-component > * {
     display: inline-flex;
-    background: #ccc;
-    color: #fff;
-    text-decoration: none;
-    outline: none;
-    cursor: pointer;
-  }
-  .common-button-component > button {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
+    flex-direction: column;
+
+    & > * {
+      display: inline-flex;
+      background: #ccc;
+      color: #fff;
+      text-decoration: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    & > button {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+    }
   }
 </style>

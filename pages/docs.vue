@@ -3,7 +3,11 @@
     section.section(v-for="component in components" :id="component.id" :key="component.id")
       .wrapper.flex
         div
-          .h2 {{ component.title }} component
+          .h2
+            span {{ component.title }} component
+            template(v-if="component.dependencies")
+              span &nbsp;
+              span ({{ component.dependencies.join(', ') }})
 
           .property.flex.column.a-start(v-for="(property, i) in component.properties" :key="i")
             .label {{ property.name }}
@@ -14,13 +18,21 @@
             small(v-if="!property.required") Default: {{ property.default || '-' }}
             small(v-else) Required property.
 
-          .label-section.flex.a-start.wrap
-            .title Events:
+          .label-section
+            .h3 Events:
             .labels(v-if="component.events && component.events.length")
               .label.green(v-for="(event, i) in component.events" :key="i") @{{ event }}
-            .title(v-else) &nbsp; -
+            div(v-else) &nbsp;-
 
           .advanced-section(v-if="component.advanced" v-html="component.advanced")
+
+          .options-section(v-if="component.options && component.options.length")
+            .h3 Options:
+            .property.flex.column.a-start(v-for="option in component.options" :key="option.name")
+              .label {{ option.name }}
+              small Type: {{ option.type }}
+              small Description: {{ option.description }}
+              vCode(v-if="option.example" :data="option.example")
 
         div
           .sticky
@@ -32,6 +44,15 @@
               // custom example for modal component
               template(v-if="component.id === 'modal'")
                 a(href="#" @click.prevent="openModal('modal1')") open modal1
+
+              // custom example for checkbox component
+              template(v-else-if="component.id === 'checkbox'")
+                commonCheckbox(v-model="checkbox.single") Single checkbox
+                div(style="margin-top: 20px;")
+                  commonCheckbox(v-model="checkbox.multiple" value="box1") Checkbox 1 (box1)
+                  commonCheckbox(v-model="checkbox.multiple" value="box2") Checkbox 2 (box2)
+                div()
+                  vCode(:data="checkboxCode")
 
               component(
                 v-else
@@ -72,10 +93,22 @@ export default {
   components: {
     vCode
   },
+  data () {
+    return {
+      checkbox: {
+        single: false,
+        multiple: ['box2']
+      }
+    }
+  },
   computed: {
     ...mapState({
       components: state => state.components
-    })
+    }),
+    checkboxCode () {
+      return `checkedSingle: ${this.checkbox.single}
+checkedArray: [${this.checkbox.multiple}]`
+    }
   },
   mounted () {
     this.checkQuery()
@@ -142,6 +175,17 @@ export default {
           width: 50%;
           &:first-child {
             padding-right: 40px;
+            .h2 {
+              position: sticky;
+              top: 60px;
+              margin-top: -30px;
+              padding-top: 30px;
+              padding-bottom: 20px;
+              background: $color-light;
+            }
+            ::v-deep code {
+              background: $color-bg;
+            }
           }
           &:last-child {
             padding-left: 40px;
@@ -173,16 +217,12 @@ export default {
     }
     .label-section {
       margin-top: 50px;
-      .title {
-        margin-top: 3px;
-      }
+    }
+    .options-section {
+      margin-top: 40px;
     }
     .advanced-section {
       margin-top: 40px;
-    }
-    ::v-deep .labels {
-      margin-top: 1px;
-      margin-left: 10px;
     }
     .property {
       margin-bottom: 20px;

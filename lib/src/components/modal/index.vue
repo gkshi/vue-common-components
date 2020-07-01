@@ -6,6 +6,10 @@
           :open="show"
           :class="`common-modal-size-${size}`"
         >
+          <div class="close" @click="close">
+            <icon-proxy v-if="_options.icon" :data="_options.icon" />
+            <span v-else class="cross">x</span>
+          </div>
           <div v-if="$slots.head" class="common-modal-head">
             <slot name="head" />
           </div>
@@ -23,8 +27,12 @@
 
 <script>
 import storeModule from '../../modules/modal'
+import iconProxy from '../../helpers/icon-proxy'
 
 export default {
+  components: {
+    iconProxy
+  },
   props: {
     id: {
       type: String,
@@ -99,7 +107,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
   .common-modal-component {
     position: fixed;
     top: 0;
@@ -109,13 +117,33 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.35);
-  }
-  .common-modal-component .common-modal-scroll-parent {
-    display: table-cell;
-    vertical-align: middle;
-  }
-  .common-modal-component dialog {
-    display: block;
-    margin: 0 auto;
+
+    .common-modal-scroll-parent {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1;
+      cursor: pointer;
+      ::v-deep {
+        svg {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    }
+
+    .cross {
+      display: block;
+    }
+
+    dialog {
+      display: block;
+      margin: 0 auto;
+    }
   }
 </style>

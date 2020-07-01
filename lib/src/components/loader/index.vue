@@ -12,6 +12,8 @@ export default {
 }
 </script>
 
-<style>
-  .common-loader-component {}
+<style lang="scss" scoped>
+  .common-loader-component {
+    //
+  }
 </style>

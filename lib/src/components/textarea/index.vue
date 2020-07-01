@@ -26,14 +26,12 @@
 </template>
 
 <script>
+import mixinId from '../../mixins/id'
 import mixinField from '../../mixins/field'
 
 export default {
-  mixins: [mixinField],
+  mixins: [mixinId, mixinField],
   props: {
-    // ID for label and textarea
-    id: String,
-
     // Textarea name value
     name: String,
 
@@ -73,11 +71,6 @@ export default {
     // Textarea disabled state
     disabled: Boolean
   },
-  data () {
-    return {
-      localId: this.id
-    }
-  },
   computed: {
     classList () {
       let str = `common-textarea-type-${this.type} common-textarea-size-${this.size}`
@@ -88,8 +81,6 @@ export default {
     }
   },
   mounted () {
-    // Random ID generating if no ID as prop
-    this.localId = this.localId || Math.random().toFixed(7).slice(2)
     if (this.autofocus) {
       this.focus()
     }
@@ -97,6 +88,8 @@ export default {
 }
 </script>
 
-<style>
-  .common-textarea-component {}
+<style lang="scss" scoped>
+  .common-textarea-component {
+    //
+  }
 </style>

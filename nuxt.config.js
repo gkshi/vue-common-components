@@ -1,4 +1,3 @@
-
 export default {
   mode: 'spa', // universal, spa
   /*
@@ -50,10 +49,10 @@ export default {
     // components: ['button', 'modal'],
     nameCasing: 'camelCase',
     modal: {
-      icon: '@/components/icons/cross'
+      icon: () => import('@/components/icons/cross')
     },
     checkbox: {
-      icon: '@/components/icons/check'
+      icon: () => import('@/components/icons/check')
     }
   },
   /*

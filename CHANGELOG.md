@@ -1,6 +1,14 @@
 Changelog
 =========
 
+### 0.0.7 (2020-06-26)
+* Now you can pass options in components.
+* Checkbox component added.
+* Button `id`, `name` properties added.
+* `node-sass`, `sass-loader` dev dependencies using.
+* `vue` added as dependency.
+
+
 ### 0.0.6 (2020-06-23)
 * Modal component added.
 
@@ -9,7 +17,7 @@ Changelog
 * Loader component added.
 * Textarea component added.
 * Input error classname was changed.
-* Input "required" prop added.
+* Input `required` prop added.
 
 
 ### 0.0.4 (2020-06-13)

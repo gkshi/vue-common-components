@@ -28,14 +28,12 @@
 </template>
 
 <script>
+import mixinId from '../../mixins/id'
 import mixinField from '../../mixins/field'
 
 export default {
-  mixins: [mixinField],
+  mixins: [mixinId, mixinField],
   props: {
-    // ID for label and input
-    id: String,
-
     // Input name value
     name: String,
 
@@ -78,11 +76,6 @@ export default {
     // Input disabled state
     disabled: Boolean
   },
-  data () {
-    return {
-      localId: this.id
-    }
-  },
   computed: {
     classList () {
       let str = `common-input-type-${this.type} common-input-size-${this.size}`
@@ -93,8 +86,6 @@ export default {
     }
   },
   mounted () {
-    // Random ID generating if no ID as prop
-    this.localId = this.localId || Math.random().toFixed(7).slice(2)
     if (this.autofocus) {
       this.focus()
     }
@@ -102,6 +93,8 @@ export default {
 }
 </script>
 
-<style>
-  .common-input-component {}
+<style lang="scss" scoped>
+  .common-input-component {
+    //
+  }
 </style>
