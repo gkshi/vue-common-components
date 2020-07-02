@@ -15,10 +15,7 @@
       @focus="$emit('focus')"
       @blur="$emit('blur')"
     >
-      <slot v-if="$slots.default" />
-      <div v-else>
-        Button
-      </div>
+      <slot>Button</slot>
     </component>
   </div>
 </template>
@@ -80,6 +77,7 @@ export default {
       return this.href ? 'a' : this.to ? isNuxt ? 'nuxt-link' : 'router-link' : 'button'
     },
     classList () {
+      // custom type and size classnames
       return `common-button-type-${this.type} common-button-size-${this.size}`
     }
   },
@@ -94,7 +92,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .common-button-component {
     display: inline-flex;
     flex-direction: column;

@@ -9,6 +9,7 @@
         :form="form"
         :value="computedValue"
         :checked="isChecked"
+        :indeterminate.prop="isIndeterminated"
         :autofocus="autofocus"
         :required="required"
         :readonly="readonly"
@@ -19,12 +20,15 @@
         @blur="blur"
       >
       <span class="box">
-        <span class="icon">
-          <icon-proxy v-if="_options.icon" :data="_options.icon" />
-          <span v-else class="dot" />
-        </span>
+        <transition>
+          <span v-if="isIndeterminated" class="indeterminate-indicator" />
+          <template v-else-if="isChecked">
+            <icon-proxy v-if="_options.icon" class="icon" :data="_options.icon" />
+            <span v-else class="checked-indicator" />
+          </template>
+        </transition>
       </span>
-      <span>
+      <span v-if="$slots.default">
         <slot />
       </span>
     </label>
@@ -53,7 +57,8 @@ export default {
     required: Boolean,
     readonly: Boolean,
     disabled: Boolean,
-    checked: Boolean
+    checked: Boolean,
+    indeterminate: Boolean
   },
   data () {
     return {
@@ -63,6 +68,9 @@ export default {
   computed: {
     classList () {
       let string = 'common-checkbox-component'
+      if (this.isIndeterminated) {
+        string += ' common-checkbox-indeterminated'
+      }
       if (this.isChecked) {
         string += ' common-checkbox-checked'
       }
@@ -80,8 +88,17 @@ export default {
     isManuallyChecked () {
       return Object.keys(this.$options.propsData).includes('checked')
     },
+    isManuallyIndeterminated () {
+      return Object.keys(this.$options.propsData).includes('indeterminate')
+    },
     isChecked () {
       return this.isManuallyChecked ? this.checked : this.multiple ? this.model.includes(this.value) : this.model
+    },
+    isIndeterminated () {
+      return this.isManuallyIndeterminated ? this.indeterminate : this.$refs.input ? this.$refs.input.indeterminate : false
+    },
+    nativeChecked () {
+      return this.$refs.input ? this.$refs.input.checked : false
     }
   },
   mounted () {
@@ -128,8 +145,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  $size: 24px;
-  $color: rgb(118, 118, 118);
+  $common-checkbox-size: 24px;
+  $common-checkbox-color: rgb(118, 118, 118);
+
   .common-checkbox-component {
     label {
       display: flex;
@@ -140,11 +158,11 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: $size;
-        height: $size;
+        width: $common-checkbox-size;
+        height: $common-checkbox-size;
         margin-right: 6px;
         background: #f8f8f8;
-        border: 2px solid $color;
+        border: 2px solid $common-checkbox-color;
         user-select: none;
         .icon {
           opacity: 0;
@@ -158,21 +176,49 @@ export default {
         }
       }
 
-      .dot {
-        display: block;
-        width: 10px;
-        height: 10px;
-        background: $color;
-      }
-
       input {
         position: absolute;
-        width: $size;
-        height: $size;
+        width: $common-checkbox-size;
+        height: $common-checkbox-size;
         margin: 0;
         opacity: 0;
         cursor: pointer;
       }
+    }
+
+    .checked-indicator {
+      position: relative;
+      width: 70%;
+      height: 70%;
+      &:before,
+      &:after {
+        content: '';
+        position: relative;
+        display: block;
+        height: 3px;
+        background: $common-checkbox-color;
+      }
+      &:before {
+        transform: rotate(45deg);
+        top: 7px;
+        left: 0px;
+        width: 8px;
+      }
+      &:after {
+        transform: rotate(-45deg);
+        top: 2px;
+        right: -3px;
+        width: 13px;
+      }
+    }
+
+    .indeterminate-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      height: 3px;
+      background: $common-checkbox-color;
     }
 
     &.common-checkbox-checked {
@@ -186,6 +232,13 @@ export default {
     &.common-checkbox-focused {
       .box {
         // focused styles
+      }
+    }
+
+    &.common-checkbox-indeterminated {
+      // indeterminated styles
+      .indeterminate-indicator {
+        opacity: 1;
       }
     }
   }

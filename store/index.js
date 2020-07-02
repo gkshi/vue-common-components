@@ -233,6 +233,12 @@ commonComponents: {
           default: 'false'
         },
         {
+          name: 'autocomplete',
+          type: 'Boolean',
+          description: 'Autocomplete state',
+          default: 'true'
+        },
+        {
           name: 'readonly',
           type: 'Boolean',
           description: 'Readonly state',
@@ -410,7 +416,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['file', 'radio', 'tabs', 'select']
+  inDev: ['context-menu', 'file', 'radio', 'tabs', 'tooltip', 'select', 'dropdown', 'switch']
 })
 
 export const getters = {

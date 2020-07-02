@@ -12,6 +12,7 @@
       :placeholder="placeholder"
       :required="required"
       :autofocus="autofocus"
+      :autocomplete="autocomplete ? 'on' : 'off'"
       :readonly="readonly"
       :disabled="disabled"
       @input="$emit('input', $event.target.value)"
@@ -70,6 +71,12 @@ export default {
     // Input autofocus state
     autofocus: Boolean,
 
+    // Autocomplete state
+    autocomplete: {
+      type: Boolean,
+      default: true
+    },
+
     // Input readonly state
     readonly: Boolean,
 
@@ -93,8 +100,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .common-input-component {
-    //
+    label {
+      display: block;
+    }
   }
 </style>

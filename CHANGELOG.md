@@ -1,6 +1,12 @@
 Changelog
 =========
 
+### 0.0.8 (2020-07-02)
+* Input `autocomplete` property added.
+* Checkbox `indeterminate` property added.
+* Modal styles fixed.
+
+
 ### 0.0.7 (2020-06-26)
 * Now you can pass options in components.
 * Checkbox component added.

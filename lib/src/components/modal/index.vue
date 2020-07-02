@@ -1,6 +1,6 @@
 <template>
   <transition>
-    <div v-if="show" class="common-modal-component">
+    <div v-if="show" class="common-modal-component" @click.self="close">
       <div class="common-modal-scroll-parent" @click.self="close">
         <dialog
           :open="show"
@@ -79,9 +79,6 @@ export default {
       if (key === 'escape' || key === 27) {
         this.closeLastModal()
       }
-      // if (key === 'enter' || key === 13) {
-      //   this.clickFirstButton()
-      // }
     },
     _registerVuexModule () {
       if (this.$store.state.commonModal) {
@@ -107,20 +104,33 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  $common-modal-padding: 40px;
+
   .common-modal-component {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 10000;
-    display: table;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: $common-modal-padding 0 0;
     background: rgba(0, 0, 0, 0.35);
+    box-sizing: border-box;
+    overflow: auto;
 
     .common-modal-scroll-parent {
-      display: table-cell;
-      vertical-align: middle;
+      max-height: 100%;
+    }
+
+    dialog {
+      position: relative;
+      max-width: 100%;
+      margin-bottom: $common-modal-padding;
+      color: inherit;
     }
 
     .close {
@@ -139,11 +149,6 @@ export default {
 
     .cross {
       display: block;
-    }
-
-    dialog {
-      display: block;
-      margin: 0 auto;
     }
   }
 </style>

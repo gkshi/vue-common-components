@@ -88,8 +88,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .common-textarea-component {
-    //
+    label {
+      display: block;
+    }
   }
 </style>
