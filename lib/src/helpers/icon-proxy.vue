@@ -1,6 +1,6 @@
-/* eslint-disable vue/no-v-html */
 <template>
   <span>
+    <!-- eslint-disable-next-line -->
     <span v-if="typeof data === 'string'" v-html="data" />
     <component :is="data" v-else-if="data" />
   </span>

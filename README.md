@@ -63,3 +63,9 @@ export default {
 }
 </script>
 ```
+
+&nbsp;  
+
+Visit [website and documentation](https://gkshi.github.io/vue-common-components/).
+
+&nbsp;  

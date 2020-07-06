@@ -5,7 +5,7 @@
         div
           .h2
             span {{ component.title }} component
-            template(v-if="component.dependencies")
+            template(v-if="component.dependencies && component.dependencies.length")
               span &nbsp;
               span ({{ component.dependencies.join(', ') }})
 
@@ -34,6 +34,11 @@
               small Description: {{ option.description }}
               vCode(v-if="option.example" :data="option.example")
 
+          template(v-if="component.id === 'select'")
+            .advanced-section
+              .h3 Option data:
+              vCode(:data="`{\n  text: String,\n  value: String, Boolean, Number, Object, Array, Function,\n  disabled: Boolean\n}`")
+
         div
           .sticky
             vCode.example(:data="component.example")
@@ -51,8 +56,35 @@
                 div(style="margin-top: 20px;")
                   commonCheckbox(v-model="checkbox.multiple" value="box1") Checkbox 1 (box1)
                   commonCheckbox(v-model="checkbox.multiple" value="box2") Checkbox 2 (box2)
-                div()
+                div
                   vCode(:data="checkboxCode")
+
+              // custom example for radio component
+              template(v-else-if="component.id === 'radio'")
+                div
+                  commonRadio(v-model="radio.single" name="single") Single
+                div(style="margin-top: 20px;")
+                  commonRadio(v-model="radio.group" name="shape" value="square") Square
+                  commonRadio(v-model="radio.group" name="shape" value="round") Round
+                  commonRadio(v-model="radio.group" name="shape" value="triangle") Triangle
+                div
+                  vCode(:data="radioCode")
+
+              // custom example for select component
+              template(v-else-if="component.id === 'select'")
+                div
+                  commonSelect(
+                    v-model="select.single"
+                    :options="select.options"
+                    :empty-value="null") Single
+                div(style="margin-top: 10px;")
+                  commonSelect(
+                    v-model="select.multiple"
+                    :options="select.options"
+                    empty-text="Custom empty text"
+                    :empty-value="null") Multiple
+                div
+                  vCode(:data="selectCode")
 
               component(
                 v-else
@@ -98,6 +130,33 @@ export default {
       checkbox: {
         single: false,
         multiple: ['box2']
+      },
+      radio: {
+        single: false,
+        group: null
+      },
+      select: {
+        single: null,
+        multiple: [],
+        options: [
+          {
+            text: 'Value 1',
+            value: 'val1'
+          },
+          {
+            text: 'Value 2',
+            value: 'val2',
+            disabled: true
+          },
+          {
+            text: 'Value 3',
+            value: 'val3'
+          },
+          {
+            text: 'Value 4',
+            value: 'val4'
+          }
+        ]
       }
     }
   },
@@ -108,6 +167,14 @@ export default {
     checkboxCode () {
       return `checkedSingle: ${this.checkbox.single}
 checkedArray: [${this.checkbox.multiple}]`
+    },
+    radioCode () {
+      return `single: ${this.radio.single}
+shape: ${this.radio.group}`
+    },
+    selectCode () {
+      return `single: ${this.select.single}
+multiple: [${this.select.multiple}]`
     }
   },
   mounted () {

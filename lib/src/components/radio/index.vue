@@ -4,12 +4,11 @@
       <input
         :id="id"
         ref="input"
-        type="checkbox"
+        type="radio"
         :name="name"
         :form="form"
         :value="computedValue"
         :checked="isChecked"
-        :indeterminate.prop="isIndeterminated"
         :autofocus="autofocus"
         :required="required"
         :readonly="readonly"
@@ -21,8 +20,7 @@
       >
       <span class="box">
         <transition>
-          <span v-if="isIndeterminated" class="indeterminate-indicator" />
-          <template v-else-if="isChecked">
+          <template v-if="isChecked">
             <icon-proxy v-if="_options && _options.icon" class="icon" :data="_options.icon" />
             <span v-else class="checked-indicator" />
           </template>
@@ -51,32 +49,28 @@ export default {
   props: {
     id: String,
     name: String,
-    model: [Boolean, Array],
+    model: [String, Boolean, Number, Object, Array, Function],
     value: [String, Boolean, Number, Object, Array, Function],
     form: String,
     autofocus: Boolean,
     required: Boolean,
     readonly: Boolean,
     disabled: Boolean,
-    checked: Boolean,
-    indeterminate: Boolean
+    checked: Boolean
   },
   computed: {
     classList () {
-      let string = 'common-checkbox-component'
-      if (this.isIndeterminated) {
-        string += ' common-checkbox-indeterminated'
-      }
+      let string = 'common-radio-component'
       if (this.isChecked) {
-        string += ' common-checkbox-checked'
+        string += ' common-radio-checked'
       }
       if (this.isFocused) {
-        string += ' common-checkbox-focused'
+        string += ' common-radio-focused'
       }
       return string
     },
     multiple () {
-      return Array.isArray(this.model)
+      return ['string', 'number', 'object', 'array'].includes(typeof this.model)
     },
     computedValue () {
       return this.isManuallyChecked ? this.checked : this.value
@@ -84,14 +78,14 @@ export default {
     isManuallyChecked () {
       return Object.keys(this.$options.propsData).includes('checked')
     },
-    isManuallyIndeterminated () {
-      return Object.keys(this.$options.propsData).includes('indeterminate')
-    },
     isChecked () {
-      return this.isManuallyChecked ? this.checked : this.multiple ? this.model.includes(this.value) : this.model
-    },
-    isIndeterminated () {
-      return this.isManuallyIndeterminated ? this.indeterminate : this.$refs.input ? this.$refs.input.indeterminate : false
+      return this.isManuallyChecked ? this.checked : this.multiple ? this.model === this.value : this.model
+    }
+  },
+  beforeMount () {
+    // Checking required "name" property if it's a group of radio buttons
+    if (this.multiple && !this.name) {
+      console.warn('[vue-common-components][radio] Looks like you\'re using a group of radio buttons. You should provide the same "name" property in each component.')
     }
   },
   methods: {
@@ -101,24 +95,17 @@ export default {
         this.$refs.input.checked = this.checked
         return
       }
-      if (this.multiple) {
-        const value = e.target.checked
-          ? [...this.model, e.target.value]
-          : this.model.filter(i => i !== e.target.value)
-        this.$emit('change', value)
-        return
-      }
-      this.$emit('change', e.target.checked)
+      this.$emit('change', this.multiple ? e.target.value : e.target.checked)
     }
   }
 }
 </script>
 
 <style lang="scss">
-  $common-checkbox-size: 24px;
-  $common-checkbox-color: rgb(118, 118, 118);
+  $common-radio-size: 24px;
+  $common-radio-color: rgb(118, 118, 118);
 
-  .common-checkbox-component {
+  .common-radio-component {
     label {
       display: flex;
       flex-direction: row;
@@ -130,12 +117,12 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: $common-checkbox-size;
-      height: $common-checkbox-size;
+      width: $common-radio-size;
+      height: $common-radio-size;
       margin-right: 6px;
       background: #f8f8f8;
-      color: $common-checkbox-color;
-      border: 2px solid $common-checkbox-color;
+      border: 2px solid $common-radio-color;
+      border-radius: 50%;
       user-select: none;
       .icon {
         opacity: 0;
@@ -151,8 +138,8 @@ export default {
 
     input {
       position: absolute;
-      width: $common-checkbox-size;
-      height: $common-checkbox-size;
+      width: $common-radio-size;
+      height: $common-radio-size;
       margin: 0;
       opacity: 0;
       cursor: pointer;
@@ -168,32 +155,23 @@ export default {
         position: relative;
         display: block;
         height: 3px;
-        background: $common-checkbox-color;
+        background: $common-radio-color;
       }
       &:before {
         transform: rotate(45deg);
         top: 7px;
-        left: 0px;
-        width: 8px;
+        left: 1px;
+        width: 6px;
       }
       &:after {
         transform: rotate(-45deg);
         top: 2px;
-        right: -3px;
-        width: 13px;
+        right: -4px;
+        width: 10px;
       }
     }
 
-    .indeterminate-indicator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50%;
-      height: 3px;
-      background: $common-checkbox-color;
-    }
-
-    &.common-checkbox-checked {
+    &.common-radio-checked {
       .box {
         .icon {
           opacity: 1;
@@ -201,15 +179,8 @@ export default {
       }
     }
 
-    &.common-checkbox-focused {
+    &.common-radio-focused {
       // focused styles
-    }
-
-    &.common-checkbox-indeterminated {
-      // indeterminated styles
-      .indeterminate-indicator {
-        opacity: 1;
-      }
     }
   }
 </style>

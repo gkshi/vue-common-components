@@ -85,7 +85,7 @@ export const state = () => ({
           name: 'id',
           type: 'String',
           description: 'ID for input tag',
-          default: 'random seven-digit number'
+          default: ''
         },
         {
           name: 'name',
@@ -156,15 +156,10 @@ commonComponents: {
 }`
         }
       ],
-      example: `<common-checkbox v-model="checkedSingle">
-  <div>Single</div>
-</common-checkbox>
-<common-checkbox v-model="checkedArray" value="box1">
-  <div>Checkbox 1</div>
-</common-checkbox>
-<common-checkbox v-model="checkedArray" value="box2">
-  <div>Checkbox 2</div>
-</common-checkbox>`,
+      example: `<common-checkbox v-model="checkedSingle">Single</common-checkbox>
+
+<common-checkbox v-model="checkedArray" value="box1">Checkbox 1</common-checkbox>
+<common-checkbox v-model="checkedArray" value="box2">Checkbox 2</common-checkbox>`,
       advanced: ''
     },
     {
@@ -325,6 +320,197 @@ commonComponents: {
 </div>`
     },
     {
+      id: 'radio',
+      title: 'Radio',
+      dependencies: [],
+      properties: [
+        {
+          name: 'id',
+          type: 'String',
+          description: 'ID for input tag',
+          default: ''
+        },
+        {
+          name: 'name',
+          type: 'String',
+          description: '"name" attribute value for radio groups. Must be the same for all radio buttons in group.',
+          default: ''
+        },
+        {
+          name: 'v-model',
+          type: 'String, Boolean, Number, Object, Array, Function',
+          description: 'Reactive value. Can be boolean if It\'s a single radio, or any type for a group.',
+          default: ''
+        },
+        {
+          name: 'value',
+          type: 'String, Boolean, Number, Object, Array, Function',
+          description: 'Value for each radio in group.',
+          default: ''
+        },
+        {
+          name: 'checked',
+          type: 'Boolean',
+          description: 'Forced value of "checked" state. If you provide this property, v-model and value will be ignored.',
+          default: ''
+        },
+        {
+          name: 'form',
+          type: 'String',
+          description: 'Form ID radio belongs',
+          default: ''
+        },
+        {
+          name: 'required',
+          type: 'Boolean',
+          description: 'Required state',
+          default: 'false'
+        },
+        {
+          name: 'autofocus',
+          type: 'Boolean',
+          description: 'Autofocus state',
+          default: 'false'
+        },
+        {
+          name: 'readonly',
+          type: 'Boolean',
+          description: 'Readonly state',
+          default: 'false'
+        },
+        {
+          name: 'disabled',
+          type: 'Boolean',
+          description: 'Disabled state',
+          default: 'false'
+        }
+      ],
+      events: ['click', 'change', 'focus', 'blur'],
+      options: [
+        {
+          name: 'icon',
+          type: 'Vue component, HTML code',
+          description: 'Custom radio icon',
+          example: `// nuxt.config.js
+commonComponents: {
+  radio: {
+    icon: () => import('@/components/icons/check')
+  }
+}`
+        }
+      ],
+      example: `<common-radio v-model="single">Square</common-radio>
+
+<common-radio v-model="shape" name="shape" value="square">Square</common-radio>
+<common-radio v-model="shape" name="shape" value="round">Round</common-radio>
+<common-radio v-model="shape" name="shape" value="triangle">Triangle</common-radio>`,
+      advanced: ''
+    },
+    {
+      id: 'select',
+      title: 'Select',
+      dependencies: [],
+      properties: [
+        {
+          name: 'v-model',
+          type: 'String, Boolean, Number, Object, Array, Function',
+          description: 'Reactive value. The select mode will be "multiple" if it\'s an array.',
+          default: ''
+        },
+        {
+          name: 'options',
+          type: 'Array',
+          description: 'An array of options. Can be simple [\'val1\', \'val2\'] or an array of objects [{ text: \'Value 1\', value \'val1\'}]',
+          required: true
+        },
+        {
+          name: 'empty-text',
+          type: 'String',
+          description: 'Text of an empty value.',
+          default: '"Not selected"'
+        },
+        {
+          name: 'empty-value',
+          type: 'String, Boolean, Number, Object, Array, Function',
+          description: 'Value of an empty value.',
+          default: 'null'
+        },
+        {
+          name: 'searchable',
+          type: 'Boolean',
+          description: 'If it\'s true, there is a search field will be in the select.',
+          default: 'true'
+        },
+        {
+          name: 'search-placeholder',
+          type: 'String',
+          description: 'Placeholder text for the search input. For searchable selects only.',
+          default: '"Search..."'
+        },
+        {
+          name: 'selected-text',
+          type: 'String',
+          description: '"Selected" text when many options are selected.',
+          default: '"{n} selected"'
+        },
+        {
+          name: 'selected-count',
+          type: 'Number',
+          description: 'Number of selected options to show the "Selected" text.',
+          default: '3'
+        },
+        {
+          name: 'required',
+          type: 'Boolean',
+          description: 'If it\'s true, the empty option will be disabled.',
+          default: 'false'
+        },
+        {
+          name: 'disabled',
+          type: 'Boolean',
+          description: 'Disabled state',
+          default: 'false'
+        }
+      ],
+      events: ['open', 'close', 'change', 'search'],
+      example: `<template>
+  <common-select v-model="simple" :options="options">Simple</common-select>
+  <common-select v-model="multiple" :options="options" empty-text="Custom empty text">Multiple</common-select>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        simple: null,
+        multiple: [],
+        options: [
+          {
+            text: 'Value 1',
+            value: 'val1'
+          },
+          {
+            text: 'Value 2',
+            value: 'val2',
+            disabled: true
+          },
+          {
+            text: 'Value 3',
+            value: 'val3'
+          },
+          {
+            text: 'Value 4',
+            value: 'val4'
+          }
+        ]
+      }
+    }
+  }
+</script>
+`,
+      advanced: ''
+    },
+    {
       id: 'textarea',
       title: 'Textarea',
       properties: [
@@ -416,7 +602,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['context-menu', 'file', 'radio', 'tabs', 'tooltip', 'select', 'dropdown', 'switch']
+  inDev: ['context-menu', 'file', 'tabs', 'tooltip', 'dropdown', 'switch']
 })
 
 export const getters = {

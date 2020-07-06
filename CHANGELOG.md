@@ -1,6 +1,11 @@
 Changelog
 =========
 
+### 0.0.9 (2020-07-06)
+* Radio component added.
+* Select component added.
+
+
 ### 0.0.8 (2020-07-02)
 * Input `autocomplete` property added.
 * Checkbox `indeterminate` property added.
