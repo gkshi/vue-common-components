@@ -7,3 +7,29 @@
     }
   }
 }
+
+.common-text-component {
+  &.common-text-type {
+    &-warning {
+      color: orange;
+    }
+  }
+  &.common-text-size {
+    &-large {
+      font-size: $font-size-subheading;
+      line-height: $line-height-subheading;
+    }
+    &-small {
+      font-size: $font-size-small;
+      line-height: $line-height-small;
+    }
+  }
+  &.common-text-weight {
+    &-light {
+      font-weight: 300;
+    }
+    &-bold {
+      font-weight: $font-weight-bold;
+    }
+  }
+}

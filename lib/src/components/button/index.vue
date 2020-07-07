@@ -99,18 +99,20 @@ export default {
 
     & > * {
       display: inline-flex;
+      align-items: center;
       background: #ccc;
       color: #fff;
-      text-decoration: none;
-      outline: none;
-      cursor: pointer;
-    }
-
-    & > button {
       font-family: inherit;
       font-size: inherit;
       line-height: inherit;
       font-weight: inherit;
+      text-decoration: none;
+      outline: none;
+      cursor: pointer;
+
+      ::v-deep svg {
+        font-weight: normal;
+      }
     }
   }
 </style>

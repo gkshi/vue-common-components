@@ -511,6 +511,80 @@ commonComponents: {
       advanced: ''
     },
     {
+      id: 'text',
+      title: 'Text',
+      dependencies: [],
+      properties: [
+        {
+          name: 'tag',
+          type: 'String',
+          description: 'Tag name for the element.',
+          default: '"div"'
+        },
+        {
+          name: 'type',
+          type: 'String',
+          description: 'Type value for custom styles.',
+          default: '"default"'
+        },
+        {
+          name: 'size',
+          type: 'String',
+          description: 'Size value for custom styles.',
+          default: '"default"'
+        },
+        {
+          name: 'weight',
+          type: 'String',
+          description: 'Weight value for custom styles.',
+          default: '"normal"'
+        }
+      ],
+      events: [],
+      example: `<common-text type="warning" weight="bold">Orange and bold text.</common-text>
+<common-text size="small">Small text.</common-text>
+<common-text size="large" weight="light">Large and light text.</common-text>`,
+      advanced: ''
+    },
+    {
+      id: 'typing-text',
+      title: 'Typing Text',
+      dependencies: [],
+      properties: [
+        {
+          name: 'tag',
+          type: 'String',
+          description: 'Tag name for the element.',
+          default: '"div"'
+        },
+        {
+          name: 'items',
+          type: 'Array',
+          description: 'An array of text items.',
+          required: true
+        },
+        {
+          name: 'item-delay',
+          type: 'Number',
+          description: 'Each item show duration (ms).',
+          default: '3000'
+        },
+        {
+          name: 'letter-delay',
+          type: 'Number',
+          description: 'Letter adding/removing delay (ms).',
+          default: '100'
+        }
+      ],
+      events: ['change', 'show', 'hide'],
+      example: `<common-typing-text
+  :items="['The first text', 'The second text', 'The third text']"
+  :item-delay="3000"
+  :letter-delay="100"
+  @change="onItemChange" />`,
+      advanced: ''
+    },
+    {
       id: 'textarea',
       title: 'Textarea',
       properties: [

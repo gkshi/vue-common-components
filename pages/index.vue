@@ -4,7 +4,7 @@
       .wrapper.narrow.flex.column.center
         h1 Common components
         h2.text-regular {{ description }}.
-      .component-list.flex.center
+      .component-list.flex.center.wrap
         nuxt-link.component(v-for="component in components" :to="`/docs?component=${component.id}`" :key="component.id") {{ component.title }}
 
       .in-dev-list.flex.column.center
@@ -123,7 +123,7 @@ export default {
       margin-bottom: 40px;
     }
     .component-list {
-      width: 800px;
+      width: 900px;
       max-width: 100%;
       margin: 50px auto 100px;
       & > * {

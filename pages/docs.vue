@@ -86,9 +86,23 @@
                 div
                   vCode(:data="selectCode")
 
+              // custom example for text component
+              template(v-else-if="component.id === 'text'")
+                div
+                  commonText(type="warning" weight="bold") Orange and bold text.
+                  commonText(size="small") Small text.
+                  commonText(size="large" weight="light") Large and light text.
+
+              // custom example for typing-text component
+              template(v-else-if="component.id === 'typing-text'")
+                div
+                  commonTypingText(
+                    :items="['The first text', 'The second text', 'The third text']"
+                    :letter-delay="100")
+
               component(
                 v-else
-                :is="`common${component.title}`"
+                :is="componentName(component.id)"
                 v-bind="propList(component.example)"
                 v-on="eventList(component.example)")
 
@@ -164,6 +178,15 @@ export default {
     ...mapState({
       components: state => state.components
     }),
+    componentName () {
+      return name => {
+        const cleanName = name.replace(/-/g, ' ')
+        const arr = cleanName.includes(' ')
+          ? cleanName.split(' ').map(i => `${i.slice(0, 1).toUpperCase()}${i.slice(1).toLowerCase()}`)
+          : [`${cleanName.slice(0, 1).toUpperCase()}${cleanName.slice(1).toLowerCase()}`]
+        return `common${arr.join('')}`
+      }
+    },
     checkboxCode () {
       return `checkedSingle: ${this.checkbox.single}
 checkedArray: [${this.checkbox.multiple}]`

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+### 0.0.10 (2020-07-07)
+* Text component added.
+* Typing Text component added.
+
+
 ### 0.0.9 (2020-07-06)
 * Radio component added.
 * Select component added.
