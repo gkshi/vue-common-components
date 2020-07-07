@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" class="common-typing-text-component">
+  <component :is="tag" :class="classList">
     {{ displayWord }}
   </component>
 </template>
@@ -33,6 +33,13 @@ export default {
     }
   },
   computed: {
+    classList () {
+      let str = 'common-typing-text-component'
+      if (this.isWordEmpty) {
+        str += ' common-typing-text-empty'
+      }
+      return str
+    },
     isWordFull () {
       return this.letterIndex === this.activeWord.length
     },
@@ -133,8 +140,39 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .common-typing-text-component {
-    //
+    position: relative;
+    display: inline-flex;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -2px;
+      display: block;
+      width: 1px;
+      height: 1.2em;
+      background: #222;
+      transform: translate(0, -50%);
+      animation: common-typing-text-toggle 1.3s linear infinite;
+    }
+
+    &.common-typing-text-empty {
+      &:after {
+        content: none;
+      }
+    }
+
+    @keyframes common-typing-text-toggle {
+      49% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      99% {
+        opacity: 0;
+      }
+    }
   }
 </style>

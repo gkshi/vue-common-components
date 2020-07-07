@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 0.0.11 (2020-07-07)
+* Typing Text component updated.
+
+
 ### 0.0.10 (2020-07-07)
 * Text component added.
 * Typing Text component added.

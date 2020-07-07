@@ -30,7 +30,8 @@
     "select",
     "text",
     "textarea",
-    "typing-text"
+    "typing-text",
+    "typing-effect"
   ],
   "scripts": {
     "dev": "nuxt",
