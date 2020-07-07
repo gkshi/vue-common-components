@@ -28,7 +28,9 @@
     "modal",
     "radio",
     "select",
-    "textarea"
+    "text",
+    "textarea",
+    "typing-text"
   ],
   "scripts": {
     "dev": "nuxt",
