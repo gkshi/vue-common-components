@@ -1,6 +1,6 @@
 <template>
   <component :is="tag" :class="classList">
-    {{ displayWord }}
+    {{ displayWord || '&nbsp;' }}
   </component>
 </template>
 
@@ -158,9 +158,7 @@ export default {
     }
 
     &.common-typing-text-empty {
-      &:after {
-        content: none;
-      }
+      //
     }
 
     @keyframes common-typing-text-toggle {

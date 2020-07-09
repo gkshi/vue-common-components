@@ -105,5 +105,8 @@ export default {
     label {
       display: block;
     }
+    input {
+      width: 100%;
+    }
   }
 </style>

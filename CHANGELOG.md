@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 0.0.12 (2020-07-09)
+* Button, Input, Textarea and Typing-text style bugfixes added.
+
+
 ### 0.0.11 (2020-07-07)
 * Typing Text component updated.
 

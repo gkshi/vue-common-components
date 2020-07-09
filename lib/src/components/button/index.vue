@@ -100,6 +100,8 @@ export default {
     & > * {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      width: 100%;
       background: #ccc;
       color: #fff;
       font-family: inherit;

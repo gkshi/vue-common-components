@@ -93,5 +93,8 @@ export default {
     label {
       display: block;
     }
+    textarea {
+      width: 100%;
+    }
   }
 </style>
