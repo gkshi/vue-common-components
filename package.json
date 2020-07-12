@@ -59,7 +59,7 @@
     "nuxt": "^2.10.0",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
-    "sass-loader": "^9.0.1",
+    "sass-loader": "^9.0.2",
     "vue-yandex-metrika": "^1.8.3"
   }
 }

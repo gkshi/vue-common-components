@@ -128,6 +128,7 @@ export default {
 
     dialog {
       position: relative;
+      display: block;
       max-width: 100%;
       margin-bottom: $common-modal-padding;
       color: inherit;

@@ -11,6 +11,7 @@
       :to="to"
       :href="href"
       :target="href ? target : false"
+      :rel="href ? 'noopener' : false"
       :disabled="disabled"
       @focus="$emit('focus')"
       @blur="$emit('blur')"
@@ -78,7 +79,11 @@ export default {
     },
     classList () {
       // custom type and size classnames
-      return `common-button-type-${this.type} common-button-size-${this.size}`
+      let classList = `common-button-type-${this.type} common-button-size-${this.size}`
+      if (this.disabled) {
+        classList += ' common-button-disabled'
+      }
+      return classList
     }
   },
   methods: {
@@ -115,6 +120,11 @@ export default {
       ::v-deep svg {
         font-weight: normal;
       }
+    }
+
+    .common-button-disabled {
+      opacity: .5;
+      pointer-events: none;
     }
   }
 </style>

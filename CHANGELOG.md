@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 0.0.13 (2020-07-09)
+* Minor updates of Button and Modal components.
+
+
 ### 0.0.12 (2020-07-09)
 * Button, Input, Textarea and Typing-text style bugfixes added.
 

@@ -676,7 +676,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['context-menu', 'file', 'tabs', 'tooltip', 'dropdown', 'switch']
+  inDev: ['context-menu', 'dropdown', 'file', 'notification', 'switch', 'tabs', 'tooltip']
 })
 
 export const getters = {
