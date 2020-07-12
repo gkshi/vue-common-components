@@ -1,7 +1,8 @@
 Changelog
 =========
 
-### 0.0.13 (2020-07-09)
+### 0.0.13 (2020-07-12)
+* Switch (Toggle) component added.
 * Minor updates of Button and Modal components.
 
 

@@ -100,6 +100,13 @@
                     :items="['The first text', 'The second text', 'The third text']"
                     :letter-delay="100")
 
+              // custom example for typing-text component
+              template(v-else-if="component.id === 'switch'")
+                div
+                  commonSwitch(v-model="switchValue" name="asd" @change="onChange") Simple switch
+                div
+                  vCode(:data="switchCode")
+
               component(
                 v-else
                 :is="componentName(component.id)"
@@ -171,7 +178,8 @@ export default {
             value: 'val4'
           }
         ]
-      }
+      },
+      switchValue: true
     }
   },
   computed: {
@@ -198,6 +206,9 @@ shape: ${this.radio.group}`
     selectCode () {
       return `single: ${this.select.single}
 multiple: [${this.select.multiple}]`
+    },
+    switchCode () {
+      return `v-model: ${this.switchValue}`
     }
   },
   mounted () {
@@ -247,6 +258,9 @@ multiple: [${this.select.multiple}]`
         }
       })
       return res
+    },
+    onChange (e) {
+      console.log('onChange', e)
     }
   }
 }

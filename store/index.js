@@ -511,6 +511,66 @@ commonComponents: {
       advanced: ''
     },
     {
+      id: 'switch',
+      title: 'Switch (Toggle)',
+      dependencies: [],
+      properties: [
+        {
+          name: 'id',
+          type: 'String',
+          description: 'ID for input tag',
+          default: ''
+        },
+        {
+          name: 'v-model',
+          type: 'String, Boolean, Number, Object, Array, Function',
+          description: 'Reactive value. If there is a value, switch will be in active state.',
+          default: ''
+        },
+        {
+          name: 'checked',
+          type: 'Boolean',
+          description: 'Forced value of "checked" state. If it\'s true, switch will be in active state.',
+          default: ''
+        },
+        {
+          name: 'form',
+          type: 'String',
+          description: 'Form ID input belongs',
+          default: ''
+        },
+        {
+          name: 'required',
+          type: 'Boolean',
+          description: 'Required state',
+          default: 'false'
+        },
+        {
+          name: 'autofocus',
+          type: 'Boolean',
+          description: 'Autofocus state',
+          default: 'false'
+        },
+        {
+          name: 'readonly',
+          type: 'Boolean',
+          description: 'Readonly state',
+          default: 'false'
+        },
+        {
+          name: 'disabled',
+          type: 'Boolean',
+          description: 'Disabled state',
+          default: 'false'
+        }
+      ],
+      events: ['click', 'change', 'focus', 'blur'],
+      example: `<common-switch v-model="isChecked" @change="onChange">
+  Label text here
+</common-switch>`,
+      advanced: ''
+    },
+    {
       id: 'text',
       title: 'Text',
       dependencies: [],
@@ -676,7 +736,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['context-menu', 'dropdown', 'file', 'notification', 'switch', 'tabs', 'tooltip']
+  inDev: ['context-menu', 'dropdown', 'file', 'notification', 'tabs', 'tooltip']
 })
 
 export const getters = {

@@ -18,7 +18,7 @@
         @focus="focus"
         @blur="blur"
       >
-      <span class="box">
+      <span class="common-radio-box">
         <transition>
           <template v-if="isChecked">
             <icon-proxy v-if="_options && _options.icon" class="icon" :data="_options.icon" />
@@ -113,7 +113,7 @@ export default {
       cursor: pointer;
     }
 
-    .box {
+    .common-radio-box {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -172,7 +172,7 @@ export default {
     }
 
     &.common-radio-checked {
-      .box {
+      .common-radio-box {
         .icon {
           opacity: 1;
         }

@@ -28,8 +28,10 @@
     "modal",
     "radio",
     "select",
+    "switch",
     "text",
     "textarea",
+    "toggle",
     "typing-text",
     "typing-effect"
   ],
