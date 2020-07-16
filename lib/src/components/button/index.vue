@@ -89,7 +89,7 @@ export default {
   methods: {
     click (e) {
       if (this.disabled) {
-        return e
+        return
       }
       this.$emit('click', e)
     }

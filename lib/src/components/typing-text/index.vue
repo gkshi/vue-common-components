@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="classList">
+  <component :is="tag" :class="classList" @click="$emit('click', $event)">
     {{ displayWord || '&nbsp;' }}
   </component>
 </template>

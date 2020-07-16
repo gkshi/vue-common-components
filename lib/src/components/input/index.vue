@@ -17,10 +17,10 @@
       :disabled="disabled"
       @input="$emit('input', $event.target.value)"
       @change="$emit('change', $event.target.value)"
-      @focus="$emit('focus', $event.target.value)"
-      @blur="$emit('blur', $event.target.value)"
+      @focus="onFocus"
+      @blur="onBlur"
       @keyup="$emit('keyup', $event)"
-      @paste="paste"
+      @paste="onPaste"
     >
     <div v-if="typeof error === 'string'" class="common-input-error">
       {{ error }}
@@ -31,9 +31,10 @@
 <script>
 import mixinId from '../../mixins/id'
 import mixinField from '../../mixins/field'
+import mixinFocusBlur from '../../mixins/focus-blur'
 
 export default {
-  mixins: [mixinId, mixinField],
+  mixins: [mixinId, mixinField, mixinFocusBlur],
   props: {
     // Input name value
     name: String,
@@ -89,12 +90,14 @@ export default {
       if (this.error) {
         str += ' common-input-error'
       }
+      if (this.isFocused) {
+        str += ' common-input-focused'
+      }
+      if (this.disabled) {
+        str += ' common-input-disabled'
+      }
+      str += ` common-input-${this.value ? 'filled' : 'empty'}`
       return str
-    }
-  },
-  mounted () {
-    if (this.autofocus) {
-      this.focus()
     }
   }
 }

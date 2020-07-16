@@ -5,7 +5,7 @@
         h1 Common components
         h2.text-regular {{ description }}.
       .component-list.flex.center.wrap
-        nuxt-link.component(v-for="component in components" :to="`/docs?component=${component.id}`" :key="component.id") {{ component.title }}
+        nuxt-link.component(v-for="component in components" v-if="!component.hidden" :to="`/docs?component=${component.id}`" :key="component.id") {{ component.title }}
 
       .in-dev-list.flex.column.center
         div Coming soon:

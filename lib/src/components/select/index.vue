@@ -199,7 +199,7 @@ export default {
     computedOptions () {
       if (this.query) {
         const query = this.query.toLowerCase()
-        return this.options.filter(i => this.optionText(i).toLowerCase().includes(query) || this.optionValue(i).toLowerCase().includes(query))
+        return this.options.filter(i => this.optionText(i).toLowerCase().includes(query) || String(this.optionValue(i)).toLowerCase().includes(query))
       }
       return this.options
     },
@@ -242,7 +242,9 @@ export default {
       this.close()
     },
     change (value) {
-      this.$emit('change', value)
+      if (value !== this.value) {
+        this.$emit('change', value)
+      }
     },
     toggle () {
       this.isOpened = !this.isOpened
@@ -251,7 +253,7 @@ export default {
       this.isOpened = false
     },
     clear () {
-      this.$emit('change', this.isMultiple ? [] : this.emptyOption.value)
+      this.change(this.isMultiple ? [] : this.emptyOption.value)
     },
     onKeyup (e) {
       const key = e.key ? e.key.toLowerCase() : e.code ? e.code.toLowerCase() : e.keyCode

@@ -1,5 +1,10 @@
 <template>
-  <component :is="tag" class="common-text-component" :class="classList">
+  <component
+    :is="tag"
+    class="common-text-component"
+    :class="classList"
+    @click="$emit('click', $event)"
+  >
     <slot />
   </component>
 </template>

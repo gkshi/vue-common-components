@@ -17,20 +17,24 @@
       :rows="rows"
       @input="$emit('input', $event.target.value)"
       @change="$emit('change', $event.target.value)"
-      @focus="$emit('focus', $event.target.value)"
-      @blur="$emit('blur', $event.target.value)"
+      @focus="onFocus"
+      @blur="onBlur"
       @keyup="$emit('keyup', $event)"
-      @paste="paste"
+      @paste="onPaste"
     />
+    <div v-if="typeof error === 'string'" class="common-textarea-error">
+      {{ error }}
+    </div>
   </div>
 </template>
 
 <script>
 import mixinId from '../../mixins/id'
 import mixinField from '../../mixins/field'
+import mixinFocusBlur from '../../mixins/focus-blur'
 
 export default {
-  mixins: [mixinId, mixinField],
+  mixins: [mixinId, mixinField, mixinFocusBlur],
   props: {
     // Textarea name value
     name: String,
@@ -77,6 +81,13 @@ export default {
       if (this.error) {
         str += ' common-textarea-error'
       }
+      if (this.isFocused) {
+        str += ' common-textarea-focused'
+      }
+      if (this.disabled) {
+        str += ' common-textarea-disabled'
+      }
+      str += ` common-textarea-${this.value ? 'filled' : 'empty'}`
       return str
     }
   },

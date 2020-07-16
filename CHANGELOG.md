@@ -1,6 +1,20 @@
 Changelog
 =========
 
+### 0.0.14 (2020-07-15)
+* Input component has some advanced classnames now.
+* Radio component style fixes included.
+* Select component filtering crash fix.
+* Loader component has `@click`, `@show` and `@hide` events now.
+* Loader component can accept icon option in nuxt config.
+* Textarea has error tag and advanced classnames now.
+* Text component has `@click` event now.
+* Typing Text component has `@click` event now.
+* Focus/blur mixin fixed.
+* Event listener refactoring included.
+
+
+
 ### 0.0.13 (2020-07-12)
 * Switch (Toggle) component added.
 * Minor updates of Button and Modal components.

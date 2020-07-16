@@ -1,6 +1,6 @@
 <template lang="pug">
   .page.docs
-    section.section(v-for="component in components" :id="component.id" :key="component.id")
+    section.section(v-for="component in components" v-if="!component.hidden" :id="component.id" :key="component.id")
       .wrapper.flex
         div
           .h2
@@ -38,6 +38,9 @@
             .advanced-section
               .h3 Option data:
               vCode(:data="`{\n  text: String,\n  value: String, Boolean, Number, Object, Array, Function,\n  disabled: Boolean\n}`")
+            .advanced-section
+              .h3 Init options:
+              vCode(:data="selectOptions")
 
         div
           .sticky
@@ -49,6 +52,11 @@
               // custom example for modal component
               template(v-if="component.id === 'modal'")
                 a(href="#" @click.prevent="openModal('modal1')") open modal1
+
+              // custom example for loader component
+              template(v-else-if="component.id === 'loader'")
+                common-switch(v-model="showLoader") show/hide
+                common-loader(:show="showLoader" @click="onClick" @show="onShow" @hide="onHide")
 
               // custom example for checkbox component
               template(v-else-if="component.id === 'checkbox'")
@@ -89,7 +97,7 @@
               // custom example for text component
               template(v-else-if="component.id === 'text'")
                 div
-                  commonText(type="warning" weight="bold") Orange and bold text.
+                  commonText(type="warning" weight="bold") Warning and bold text.
                   commonText(size="small") Small text.
                   commonText(size="large" weight="light") Large and light text.
 
@@ -106,6 +114,19 @@
                   commonSwitch(v-model="switchValue" name="asd" @change="onChange") Simple switch
                 div
                   vCode(:data="switchCode")
+
+              // custom example for notification component
+              template(v-else-if="component.id === 'notification'")
+                div
+                  div
+                    span 1. &nbsp;
+                    a(href="#" @click.prevent="showNotification('just text')") simple notification
+                  div
+                    span 2. &nbsp;
+                    a(href="#" @click.prevent="showNotification({ type: 'error', content: `<div>HTML code</div>` })") error type + html code
+                  div
+                    span 3. &nbsp;
+                    a(href="#" @click.prevent="showNotification({ type: 'warning', content: 'No autohide here', timeout: 0 })") warning type + no timeout
 
               component(
                 v-else
@@ -179,7 +200,8 @@ export default {
           }
         ]
       },
-      switchValue: true
+      switchValue: true,
+      showLoader: true
     }
   },
   computed: {
@@ -206,6 +228,18 @@ shape: ${this.radio.group}`
     selectCode () {
       return `single: ${this.select.single}
 multiple: [${this.select.multiple}]`
+    },
+    selectOptions () {
+      return `// nuxt.config.js
+commonComponents: {
+  select: {
+    icons: {
+      clear: () => import('@/components/icons/cross'),
+      angle: () => import('@/components/icons/angle'),
+      selected: () => import('@/components/icons/check')
+    }
+  }
+}`
     },
     switchCode () {
       return `v-model: ${this.switchValue}`
@@ -261,6 +295,15 @@ multiple: [${this.select.multiple}]`
     },
     onChange (e) {
       console.log('onChange', e)
+    },
+    onClick (e) {
+      console.log('onClick', e)
+    },
+    onShow (e) {
+      console.log('onShow', e)
+    },
+    onHide (e) {
+      console.log('onHide', e)
     }
   }
 }

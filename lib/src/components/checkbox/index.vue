@@ -14,10 +14,10 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @change="change"
+        @change="onChange"
         @click="$emit('click', $event)"
-        @focus="focus"
-        @blur="blur"
+        @focus="onFocus"
+        @blur="onBlur"
       >
       <span class="box">
         <transition>
@@ -95,7 +95,7 @@ export default {
     }
   },
   methods: {
-    change (e) {
+    onChange (e) {
       if (this.isManuallyChecked) {
         this.$emit('change', e.target.checked)
         this.$refs.input.checked = this.checked

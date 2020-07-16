@@ -267,8 +267,21 @@ commonComponents: {
           default: 'false'
         }
       ],
-      events: [],
-      example: '<common-loader :show="true" />'
+      events: ['click', 'show', 'hide'],
+      options: [
+        {
+          name: 'icon',
+          type: 'Vue component, HTML code',
+          description: 'Custom loading icon',
+          example: `// nuxt.config.js
+commonComponents: {
+  loader: {
+    icon: () => import('@/components/icons/loading')
+  }
+}`
+        }
+      ],
+      example: '<common-loader :show="true" @show="onShow" @hide="onHide" />'
     },
     {
       id: 'modal',
@@ -318,6 +331,19 @@ commonComponents: {
     <div class="label blue">closeAllModals()</div>
   </div>
 </div>`
+    },
+    {
+      hidden: true,
+      id: 'notification',
+      title: 'Notification',
+      dependencies: ['vuex'],
+      properties: [],
+      events: [],
+      options: [],
+      example: `<a href="#" @click.prevent="showNotification('just text')">simple notification</a>
+<a href="#" @click.prevent="showNotification({ type: 'error', content: \`<div>HTML code</div>\` })">error type + html code</a>
+<a href="#" @click.prevent="showNotification({ type: 'warning', content: 'No timeout here', timeout: 0 })">warning type + no timeout</a>`,
+      advanced: ''
     },
     {
       id: 'radio',
@@ -600,8 +626,8 @@ commonComponents: {
           default: '"normal"'
         }
       ],
-      events: [],
-      example: `<common-text type="warning" weight="bold">Orange and bold text.</common-text>
+      events: ['click'],
+      example: `<common-text type="warning" weight="bold">Warning and bold text.</common-text>
 <common-text size="small">Small text.</common-text>
 <common-text size="large" weight="light">Large and light text.</common-text>`,
       advanced: ''
@@ -636,7 +662,7 @@ commonComponents: {
           default: '100'
         }
       ],
-      events: ['change', 'show', 'hide'],
+      events: ['click', 'change', 'show', 'hide'],
       example: `<common-typing-text
   :items="['The first text', 'The second text', 'The third text']"
   :item-delay="3000"
@@ -740,5 +766,5 @@ commonComponents: {
 })
 
 export const getters = {
-  ids: state => state.components.map(i => i.id)
+  ids: state => state.components.map(i => !i.hidden ? i.id : undefined)
 }

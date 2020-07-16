@@ -13,15 +13,15 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @change="change"
+        @change="onChange"
         @click="$emit('click', $event)"
-        @focus="focus"
-        @blur="blur"
+        @focus="onFocus"
+        @blur="onBlur"
       >
       <span class="common-radio-box">
         <transition>
           <template v-if="isChecked">
-            <icon-proxy v-if="_options && _options.icon" class="icon" :data="_options.icon" />
+            <icon-proxy v-if="_options && _options.icon" class="common-radio-icon" :data="_options.icon" />
             <span v-else class="checked-indicator" />
           </template>
         </transition>
@@ -89,7 +89,7 @@ export default {
     }
   },
   methods: {
-    change (e) {
+    onChange (e) {
       if (this.isManuallyChecked) {
         this.$emit('change', e.target.checked)
         this.$refs.input.checked = this.checked
@@ -124,12 +124,12 @@ export default {
       border: 2px solid $common-radio-color;
       border-radius: 50%;
       user-select: none;
-      .icon {
+      .common-radio-icon {
         opacity: 0;
       }
     }
 
-    .icon {
+    .common-radio-icon {
       ::v-deep svg {
         max-width: 100%;
         max-height: 100%;
@@ -147,8 +147,8 @@ export default {
 
     .checked-indicator {
       position: relative;
-      width: 70%;
-      height: 70%;
+      width: 14px;
+      height: 14px;
       &:before,
       &:after {
         content: '';
@@ -173,7 +173,7 @@ export default {
 
     &.common-radio-checked {
       .common-radio-box {
-        .icon {
+        .common-radio-icon {
           opacity: 1;
         }
       }

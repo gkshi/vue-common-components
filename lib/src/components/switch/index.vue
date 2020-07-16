@@ -12,10 +12,10 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @change="change"
+        @change="onChange"
         @click="$emit('click', $event)"
-        @focus="focus"
-        @blur="blur"
+        @focus="onFocus"
+        @blur="onBlur"
       >
       <span class="common-switch-box" />
       <span v-if="$slots.default" class="common-switch-label">
@@ -64,8 +64,7 @@ export default {
     }
   },
   methods: {
-    change (e) {
-      console.log('change', e)
+    onChange (e) {
       if (this.isManuallyChecked) {
         this.$emit('change', e.target.checked)
         this.$refs.input.checked = this.checked
