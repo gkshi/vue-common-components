@@ -333,14 +333,15 @@ commonComponents: {
 </div>`
     },
     {
-      hidden: true,
       id: 'notification',
       title: 'Notification',
       dependencies: ['vuex'],
       properties: [],
       events: [],
+      rootEvents: ['notification-show', 'notification-hide'],
       options: [],
-      example: `<a href="#" @click.prevent="showNotification('just text')">simple notification</a>
+      example: `// using in any components
+<a href="#" @click.prevent="showNotification('just text')">simple notification</a>
 <a href="#" @click.prevent="showNotification({ type: 'error', content: \`<div>HTML code</div>\` })">error type + html code</a>
 <a href="#" @click.prevent="showNotification({ type: 'warning', content: 'No timeout here', timeout: 0 })">warning type + no timeout</a>`,
       advanced: ''
@@ -762,7 +763,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['context-menu', 'dropdown', 'file', 'notification', 'tabs', 'tooltip']
+  inDev: ['context-menu', 'dropdown', 'file', 'tabs', 'tooltip']
 })
 
 export const getters = {

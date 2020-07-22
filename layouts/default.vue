@@ -4,6 +4,7 @@
     main
       nuxt
     // vFooter
+    common-notification
 </template>
 
 <script>

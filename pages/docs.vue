@@ -18,13 +18,103 @@
             small(v-if="!property.required") Default: {{ property.default || '-' }}
             small(v-else) Required property.
 
+          // custom documentation for notifications
+          template(v-if="component.id === 'notification'")
+            .advanced-section
+              .h3 Global methods
+              .property.flex.column.a-start
+                .label.blue showNotification(data)
+                small Shows notification. Accepts notification data object or string.
+              .property.flex.column.a-start
+                .label.blue hideNotification(id)
+                small Hides notification. Accepts notification id.
+              .property.flex.column.a-start
+                .label.blue hideLastNotification()
+                small Hides last notification in the list.
+              .property.flex.column.a-start
+                .label.blue hideAllNotifications()
+                small Hides all notifications in the list.
+
+            .advanced-section
+              .h3 Notification options
+              .property.flex.column.a-start
+                .label id
+                small Type: String, Number
+                small Description: Notification ID. Optionally.
+                small Default: random 7-digit string
+              .property.flex.column.a-start
+                .label type
+                small Type: String
+                small Description: Notification type.
+                small Values: default, warning, error, success
+                small Default: "default"
+              .property.flex.column.a-start
+                .label title
+                small Type: String
+                small Description: Notification title. Can be simple text or HTML-code.
+                small Default: Notification type (or empty if default).
+              .property.flex.column.a-start
+                .label content
+                small Type: String
+                small Description: Notification content. Can be simple text or HTML-code.
+              .property.flex.column.a-start
+                .label timeout
+                small Type: Number
+                small Description: Delay to hide notification (in ms). If it's zero, notification won't be hidden automatically.
+                small Default: 5000
+
           .label-section
             .h3 Events:
             .labels(v-if="component.events && component.events.length")
               .label.green(v-for="(event, i) in component.events" :key="i") @{{ event }}
             div(v-else) &nbsp;-
 
+          .label-section(v-if="component.rootEvents && component.rootEvents.length")
+            .h3 Root events:
+            .labels
+              .label.green(v-for="(event, i) in component.rootEvents" :key="i") @{{ event }}
+
           .advanced-section(v-if="component.advanced" v-html="component.advanced")
+
+          // notifications custom code
+          .advanced-section(v-if="component.id === 'notification'")
+            .h3 Init options
+            .property.flex.column.a-start
+              .label icon
+              small Type: Vue component, HTML code
+              small Description: an icon for "close" button.
+              small Default: null
+            .property.flex.column.a-start
+              .label timeout
+              small Type: Number
+              small Description: Default timeout for notifications (in ms).
+              small Default: 5000
+            .property.flex.column.a-start
+              .label showTitle
+              small Type: Boolean
+              small Description: If it's true, title block will be displayed.
+              small Default: true
+            .property.flex.column.a-start
+              .label titles.default
+              small Type: String, HTML code
+              small Description: Default title for default notifications.
+              small Default: ""
+            .property.flex.column.a-start
+              .label titles.warning
+              small Type: String, HTML code
+              small Description: Default title for warning notifications.
+              small Default: "Warning"
+            .property.flex.column.a-start
+              .label titles.error
+              small Type: String, HTML code
+              small Description: Default title for error notifications.
+              small Default: "Error"
+            .property.flex.column.a-start
+              .label titles.success
+              small Type: String, HTML code
+              small Description: Default title for success notifications.
+              small Default: "Success"
+            vCode(:data="notificationOptions")
 
           .options-section(v-if="component.options && component.options.length")
             .h3 Options:
@@ -45,6 +135,10 @@
         div
           .sticky
             vCode.example(:data="component.example")
+
+            // custom example for notification component
+            template(v-if="component.id === 'notification'")
+              vCode(:data="notificationUsing")
 
             div Live example:
             .live
@@ -126,7 +220,14 @@
                     a(href="#" @click.prevent="showNotification({ type: 'error', content: `<div>HTML code</div>` })") error type + html code
                   div
                     span 3. &nbsp;
-                    a(href="#" @click.prevent="showNotification({ type: 'warning', content: 'No autohide here', timeout: 0 })") warning type + no timeout
+                    a(href="#" @click.prevent="showNotification({ type: 'warning', content: 'No timeout here', timeout: 0 })") warning type + no timeout
+
+                div
+                  div &nbsp;
+                  div
+                    a(href="#" @click.prevent="hideLastNotification") hide last notification
+                  div
+                    a(href="#" @click.prevent="hideAllNotifications") hide all notifications
 
               component(
                 v-else
@@ -243,10 +344,33 @@ commonComponents: {
     },
     switchCode () {
       return `v-model: ${this.switchValue}`
+    },
+    notificationOptions () {
+      return `// nuxt.config.js
+commonComponents: {
+  notification: {
+    icon: null,
+    timeout: 5000,
+    showTitle: true,
+    titles: {
+      default: '',
+      warning: 'Warning',
+      error: 'Error',
+      success: 'Success'
+    }
+  }
+}`
+    },
+    notificationUsing () {
+      return `// recommended to put it in layout (or page)
+<common-notification />`
     }
   },
   mounted () {
     this.checkQuery()
+
+    this.$root.$on('notification-show', this.onShow)
+    this.$root.$on('notification-hide', this.onHide)
   },
   methods: {
     checkQuery () {
