@@ -4,6 +4,13 @@
       .wrapper.narrow.flex.column.center
         h1 Common components
         h2.text-regular {{ description }}.
+
+      .counters.flex.a-center
+        a(href="https://www.npmjs.com/package/vue-common-components" target="_blank")
+          img(src="https://img.shields.io/npm/v/vue-common-components.svg")
+        a(href="https://npm-stat.com/charts.html?package=vue-common-components" target="_blank")
+          img(src="https://img.shields.io/npm/dm/vue-common-components.svg")
+
       .component-list.flex.center.wrap
         nuxt-link.component(v-for="component in components" v-if="!component.hidden" :to="`/docs?component=${component.id}`" :key="component.id") {{ component.title }}
 
@@ -119,9 +126,19 @@ export default {
   .page.index {
     margin-top: 60px;
     margin-bottom: 100px;
+
     .heading {
       margin-bottom: 40px;
     }
+
+    .counters {
+      & > * {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+    }
+
     .component-list {
       width: 840px;
       max-width: 100%;
@@ -130,6 +147,7 @@ export default {
         margin: 8px;
       }
     }
+
     .in-dev-list {
       margin-top: -70px;
       margin-bottom: 100px;
@@ -143,6 +161,7 @@ export default {
         }
       }
     }
+
     .component {
       display: block;
       background: $color-light;
@@ -155,9 +174,11 @@ export default {
         background: darken($color-light, 3%);
       }
     }
+
     section {
       margin-bottom: 50px;
     }
+
     .pagination {
       margin-top: 100px;
     }
