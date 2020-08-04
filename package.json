@@ -29,6 +29,7 @@
     "radio",
     "select",
     "switch",
+    "tabs",
     "text",
     "textarea",
     "toggle",
@@ -46,22 +47,22 @@
     "*.{js,vue}": "yarn lint"
   },
   "dependencies": {
-    "vue": "^2.6.0"
+    "node-sass": ">=4.0.0",
+    "sass-loader": ">=8.0.0",
+    "vue": ">=2.6.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^3.0.0",
+    "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
-    "babel-eslint": "^10.0.0",
-    "eslint": "^7.0.0",
-    "eslint-plugin-nuxt": ">=0.4.0",
-    "husky": "^4.0.0",
-    "lint-staged": "^10.0.0",
-    "node-sass": "^4.10.0",
-    "nuxt": "^2.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.5.0",
+    "eslint-plugin-nuxt": ">=1.0.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "nuxt": "^2.14.0",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
-    "sass-loader": "^9.0.0",
     "vue-yandex-metrika": "^1.8.3"
   }
 }

@@ -123,7 +123,7 @@ export default {
       margin-bottom: 40px;
     }
     .component-list {
-      width: 900px;
+      width: 840px;
       max-width: 100%;
       margin: 50px auto 100px;
       & > * {

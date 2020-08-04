@@ -44,7 +44,7 @@ export default {
       font-size: $font-size-code;
       line-height: $line-height-code;
       border-radius: 5px;
-      max-height: 270px;
+      max-height: 250px;
       overflow: auto;
     }
   }

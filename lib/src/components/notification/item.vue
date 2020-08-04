@@ -34,7 +34,7 @@ export default {
       return `common-notification-component common-notification-type-${this.data.type}`
     },
     timeoutDelay () {
-      return Object.keys(this.data).includes('timeout') ? this.data.timeout : this._options.timeout
+      return Object.keys(this.data).includes('timeout') ? this.data.timeout || 0 : this._options.timeout
     },
     title () {
       if (Object.keys(this.data).includes('title')) {

@@ -107,6 +107,7 @@ export default {
       align-items: center;
       justify-content: center;
       width: 100%;
+      height: 100%;
       background: #ccc;
       color: #fff;
       font-family: inherit;

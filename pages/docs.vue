@@ -63,6 +63,28 @@
                 small Description: Delay to hide notification (in ms). If it's zero, notification won't be hidden automatically.
                 small Default: 5000
 
+          // tabs custom code
+          .advanced-section(v-if="component.id === 'tabs'")
+            .h3 Tab options
+            .property.flex.column.a-start
+              .label id
+              small Type: String
+              small Description: Tab id. It will be the same as data-common-tab attribute of tab DOM element.
+            .property.flex.column.a-start
+              .label label
+              small Type: String, HTML code
+              small Description: Tab label text or HTML code.
+            .property.flex.column.a-start
+              .label active
+              small Type: Boolean
+              small Description: if it's true, this tab will be opened by default.
+              small Default: false
+            .property.flex.column.a-start
+              .label disabled
+              small Type: Boolean
+              small Description: if it's true, this tab will be disabled.
+              small Default: false
+
           .label-section
             .h3 Events:
             .labels(v-if="component.events && component.events.length")
@@ -188,6 +210,20 @@
                 div
                   vCode(:data="selectCode")
 
+              // custom example for tabs component
+              template(v-if="component.id === 'tabs'")
+                common-tabs(:tabs="tabs" @change="onChange")
+
+                div(data-common-tab="first")
+                  div simple tab, not active, not disabled
+                  vCode(:data="tab1code")
+                div(data-common-tab="second")
+                  div active by default tab
+                  vCode(:data="tab2code")
+                div(data-common-tab="third")
+                  div disabled tab
+                  vCode(:data="tab3code")
+
               // custom example for text component
               template(v-else-if="component.id === 'text'")
                 div
@@ -302,7 +338,23 @@ export default {
         ]
       },
       switchValue: true,
-      showLoader: true
+      showLoader: true,
+      tabs: [
+        {
+          id: 'first',
+          label: 'The first tab'
+        },
+        {
+          id: 'second',
+          label: 'The second tab',
+          active: true
+        },
+        {
+          id: 'third',
+          label: 'Disabled tab',
+          disabled: true
+        }
+      ]
     }
   },
   computed: {
@@ -364,6 +416,24 @@ commonComponents: {
     notificationUsing () {
       return `// recommended to put it in layout (or page)
 <common-notification />`
+    },
+    tab1code () {
+      return `// simple tab, not active, not disabled
+{
+  id: 'first',
+  label: 'The first label'
+}`
+    },
+    tab2code () {
+      return `// active by default tab
+{
+  id: 'second',
+  label: 'The second label',
+  active: true
+}`
+    },
+    tab3code () {
+      return ''
     }
   },
   mounted () {

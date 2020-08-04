@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 0.0.16 (2020-08-04)
+* Tabs component added.
+
+
 ### 0.0.15 (2020-07-22)
 * Notification component added.
 

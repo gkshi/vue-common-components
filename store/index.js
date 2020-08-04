@@ -539,7 +539,7 @@ commonComponents: {
     },
     {
       id: 'switch',
-      title: 'Switch (Toggle)',
+      title: 'Switch/Toggle',
       dependencies: [],
       properties: [
         {
@@ -595,6 +595,59 @@ commonComponents: {
       example: `<common-switch v-model="isChecked" @change="onChange">
   Label text here
 </common-switch>`,
+      advanced: ''
+    },
+    {
+      id: 'tabs',
+      title: 'Tabs',
+      dependencies: [],
+      properties: [
+        {
+          name: 'tabs',
+          type: 'Array',
+          description: 'An array of tabs. Can be an array of objects or simple strings (with tab labels).',
+          required: true
+        },
+        {
+          name: 'disabled',
+          type: 'Boolean',
+          description: 'If it\'s true, all the tabs will be disabled.',
+          default: 'false'
+        }
+      ],
+      events: ['change'],
+      example: `<template>
+  <common-tabs :tabs="tabs" />
+
+  <div data-common-tab="first">Content fo the first tab</div>
+  <div data-common-tab="second">Content fo the second tab</div>
+  <div data-common-tab="third">Content fo the third tab</div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        tabs: [
+          {
+            id: 'first',
+            label: 'The first tab'
+          },
+          {
+            id: 'second',
+            label: 'The second tab',
+            active: true
+          },
+          {
+            id: 'third',
+            label: 'Disabled tab',
+            disabled: true
+          }
+        ]
+      }
+    }
+  }
+</script>`,
       advanced: ''
     },
     {
@@ -763,7 +816,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['context-menu', 'dropdown', 'file', 'tabs', 'tooltip']
+  inDev: ['context-menu', 'dropdown', 'file-input', 'tooltip']
 })
 
 export const getters = {
