@@ -2,6 +2,9 @@
 
 > Global basic components for your Vue.js/Nuxt.js project
 
+[![npm version](https://img.shields.io/npm/v/vue-common-components.svg)](https://www.npmjs.org/package/vue-common-components)
+[![npm downloads](https://img.shields.io/npm/dm/vue-common-components.svg)](http://npm-stat.com/charts.html?package=vue-common-components)
+
 &nbsp;  
 
 Visit [website and documentation](https://gkshi.github.io/vue-common-components/).
