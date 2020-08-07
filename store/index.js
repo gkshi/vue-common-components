@@ -163,6 +163,15 @@ commonComponents: {
       advanced: ''
     },
     {
+      id: 'context-menu',
+      title: 'Context Menu',
+      properties: [],
+      events: [],
+      options: [],
+      example: '',
+      advanced: ''
+    },
+    {
       id: 'input',
       title: 'Input',
       properties: [
@@ -816,7 +825,7 @@ commonComponents: {
 />`
     }
   ],
-  inDev: ['context-menu', 'dropdown', 'file-input', 'tooltip']
+  inDev: ['dropdown', 'file-input', 'tooltip']
 })
 
 export const getters = {
