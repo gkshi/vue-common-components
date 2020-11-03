@@ -19,7 +19,7 @@
         @focus="onFocus"
         @blur="onBlur"
       >
-      <span class="box">
+      <span class="common-checkbox-box">
         <transition>
           <span v-if="isIndeterminated" class="indeterminate-indicator" />
           <template v-else-if="isChecked">
@@ -28,7 +28,7 @@
           </template>
         </transition>
       </span>
-      <span v-if="$slots.default">
+      <span v-if="$slots.default" class="common-checkbox-label">
         <slot />
       </span>
     </label>
@@ -126,13 +126,12 @@ export default {
       cursor: pointer;
     }
 
-    .box {
+    .common-checkbox-box {
       display: flex;
       justify-content: center;
       align-items: center;
       width: $common-checkbox-size;
       height: $common-checkbox-size;
-      margin-right: 6px;
       background: #f8f8f8;
       color: $common-checkbox-color;
       border: 2px solid $common-checkbox-color;
@@ -140,6 +139,10 @@ export default {
       .icon {
         opacity: 0;
       }
+    }
+
+    .common-checkbox-label {
+      margin-left: 6px;
     }
 
     .icon {
@@ -194,7 +197,7 @@ export default {
     }
 
     &.common-checkbox-checked {
-      .box {
+      .common-checkbox-box {
         .icon {
           opacity: 1;
         }
